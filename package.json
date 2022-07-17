@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "parcel": "^2.6.2",
+    "three": "^0.142.0"
+  }
+}

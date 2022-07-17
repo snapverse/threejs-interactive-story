@@ -1,4 +1,4 @@
-import * as THREE from './assets/three'
+import * as THREE from 'three'
 
 const initState = {
   WINDOW_HEIGHT: window.innerHeight,
