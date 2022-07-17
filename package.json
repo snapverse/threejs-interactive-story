@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "develop": "npx parcel src/index.html"
+  },
   "dependencies": {
     "parcel": "^2.6.2",
     "three": "^0.142.0"
