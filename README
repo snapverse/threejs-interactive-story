@@ -1,28 +1,17 @@
-# Foobar
+# Los parecidos a nosotros
 
-Foobar is a Python library for dealing with word pluralization.
+Is a interactive story made with threejs
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
 ```bash
-pip install foobar
+npm i
 ```
 
 ## Usage
 
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+```bash
+npm run develop
 ```
 
 ## Contributing
