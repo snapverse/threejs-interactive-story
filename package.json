@@ -1,9 +1,24 @@
 {
+  "name": "interative-story",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "develop": "npx parcel src/index.html"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "prettier -w ."
+  },
+  "devDependencies": {
+    "vite": "3.0.0",
+    "eslint": "8.20.0",
+    "eslint-config-standard": "17.0.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.4",
+    "eslint-plugin-promise": "6.0.0",
+    "prettier": "2.7.1"
   },
   "dependencies": {
-    "parcel": "^2.6.2",
-    "three": "^0.142.0"
+    "three": "0.142.0"
   }
 }

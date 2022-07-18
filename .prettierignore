@@ -1,0 +1,6 @@
+build/
+node_modules/
+.parcel-cache/
+public/
+dist
+.cache/
