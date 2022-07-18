@@ -8,7 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run:
+      - run: |
+          yarn install
           yarn run build
       - uses: amondnet/vercel-action@v20 #deploy
         with:
