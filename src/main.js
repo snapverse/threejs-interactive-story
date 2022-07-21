@@ -13,13 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function init() {
   scene = new THREE.Scene()
   listener = new THREE.AudioListener();
-  camera = new THREE.PerspectiveCamera(70, WINDOW_WIDTH / WINDOW_HEIGHT, 1, 1000);
+  camera = new THREE.PerspectiveCamera(79, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
   camera.add(listener)
   camera.position.set(0, 0, 5);
 
-  const texture = new THREE.TextureLoader().load('./textures/map.jpg');
+  const texture = new THREE.TextureLoader().load('./textures/map4.jpg');
 
-  const geometry = new THREE.BoxGeometry(16, 10, 0);
+  const geometry = new THREE.BoxGeometry(19, 9, 0);
   const material = new THREE.MeshBasicMaterial({ map: texture });
   const cube = new THREE.Mesh(geometry, material);
   scene.add(cube);
@@ -30,7 +30,7 @@ function init() {
   document.body.appendChild(renderer.domElement)
 
   setMapControls(geometry)
-  addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: .08 });
+  addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: .09 });
 }
 
 function animate() {
@@ -42,8 +42,10 @@ function animate() {
 
 function addSound(listener, { path, loop, volume }) {
   const sound = new THREE.Audio( listener );
+  //const sound = new THREE.PositionalAudio( listener );
 
   const audioLoader = new THREE.AudioLoader();
+  
   audioLoader.load(path, function(buffer) {
     sound.setBuffer(buffer);
     sound.setLoop(loop);
@@ -64,8 +66,8 @@ function setMapControls(geometry) {
   controls = new MapControls(camera, renderer.domElement);
 
   controls.screenSpacePanning = true;
-  controls.minDistance = 2;
-  controls.maxDistance = 5.2;
+  controls.minDistance = 1;
+  controls.maxDistance = 4;
   controls.enableRotate = false
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
