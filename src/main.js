@@ -1,4 +1,3 @@
-// @ts-check
 import * as THREE from 'three'
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
@@ -16,12 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
 function init() {
   scene = new THREE.Scene()
   scene.background = new THREE.Color(0x7C6A56)
+  listener = new THREE.AudioListener()
+  camera = new THREE.PerspectiveCamera(
+    86,
+    WINDOW_WIDTH / WINDOW_HEIGHT,
+    1,
+    1000
+  )
   listener = new THREE.AudioListener();
   camera = new THREE.PerspectiveCamera(70, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
   camera.add(listener)
   camera.position.set(0, -500, 5000);
-
-
+  
   const getImageRatioPlane = async () => {
     const texture = await new THREE.TextureLoader().loadAsync('./textures/map4.jpg');
     const material = new THREE.MeshBasicMaterial({ map: texture });
