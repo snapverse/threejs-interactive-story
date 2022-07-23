@@ -1,0 +1,10 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 636 636" width="40" height="40">
+	<title>Forma 1</title>
+	<defs>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="f1" ><feDropShadow dx="0" dy="0" stdDeviation="55.833333333333336" flood-color="#ffffff" flood-opacity="2"/></filter>
+	</defs>
+	<style>
+		.s0 { filter: url(#f1);fill: #ffffff } 
+	</style>
+	<path id="mouse" class="s0" d="m318 500.4c-100.9 0-182.4-81.5-182.4-182.4 0-100.9 81.5-182.4 182.4-182.4 100.9 0 182.4 81.5 182.4 182.4 0 100.9-81.5 182.4-182.4 182.4z"/>
+</svg>

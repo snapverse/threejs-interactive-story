@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "lit": "2.2.8",
+    "camera-controls": "1.35.0",
     "three": "0.142.0"
   }
 }

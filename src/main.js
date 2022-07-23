@@ -1,4 +1,3 @@
-// @ts-check
 import * as THREE from 'three'
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
 import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
@@ -24,24 +23,27 @@ function init() {
     1000
   )
   listener = new THREE.AudioListener();
-  camera = new THREE.PerspectiveCamera(79, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(70, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
   camera.add(listener)
-  camera.position.set(0, 0, 6)
+  camera.position.set(0, -500, 5000);
 
-  const texture = new THREE.TextureLoader().load('./textures/map4.jpg');
+  const getImageRatioPlane = async () => {
+    const texture = await new THREE.TextureLoader().loadAsync('./textures/map4.jpg');
+    const material = new THREE.MeshBasicMaterial({ map: texture });
+    const geometry = new THREE.PlaneGeometry(texture.image.width, texture.image.height);
+    const plane = new THREE.Mesh(geometry, material);
+    scene.add(plane);
 
-  const geometry = new THREE.BoxGeometry(19, 9, 0);
-  const material = new THREE.MeshBasicMaterial({ map: texture });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+    return geometry
+  }
   
   renderer = new THREE.WebGLRenderer()
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-  document.querySelector("#app")?.appendChild(renderer.domElement)
 
-  controls = controller(geometry, camera, renderer, 1)
-  addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: 0.08 })
+  addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: .09 });
+  setMapControls(getImageRatioPlane())
+  document.querySelector("#app")?.appendChild(renderer.domElement)
 }
 
 function animate() {
@@ -77,23 +79,24 @@ function setMapControls(geometry) {
 
   controls.screenSpacePanning = true;
   controls.minDistance = 1;
-  controls.maxDistance = 4;
+  controls.maxDistance = 600;
   controls.enableRotate = false
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
-  controls.maxPolarAngle = Math.PI / 2;
+  //controls.maxPolarAngle = Math.PI / 2;
   
   var box = new THREE.Box3();
   box.setFromObject(controls.object);
 
-  const minPan = new THREE.Vector3(-2, -2, -2);
-  const maxPan = new THREE.Vector3(2, 2, 2);
-  const _v = new THREE.Vector3();
+  const minPan = new THREE.Vector3(-200, -140, 0);
+  const maxPan = new THREE.Vector3(200, 85, 0);
+  const _v = new THREE.Vector3(2000,2000,1000);
   
   controls.addEventListener('change', evt => {
     _v.copy(controls.target);
     controls.target.clamp(minPan, maxPan);
     _v.sub(controls.target);
     camera.position.sub(_v);
+    console.log(controls.object.position)
   })
 }
