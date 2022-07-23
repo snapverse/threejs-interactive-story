@@ -1,13 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Los Parecidos A Nosotros | Cuento Interactivo</title>
     <link rel="stylesheet" href="/src/styles.css" />
-    <title>Cuento Interactivo</title>
   </head>
   <body>
+    <div id="app">
+      <x-header>
+        <x-mute></x-mute>
+      </x-header>
+      <x-aside></x-aside>
+      <x-footer></x-footer>
+    </div>
+    <script type="module" src="/src/components/index.js"></script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
