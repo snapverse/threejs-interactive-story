@@ -127,6 +127,11 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
+camera-controls@1.35.0:
+  version "1.35.0"
+  resolved "https://registry.yarnpkg.com/camera-controls/-/camera-controls-1.35.0.tgz#9a17e9c7eaf89f1fb7354a9fbd2e897bb0c304b5"
+  integrity sha512-A7an94BZKKdKjDqVbdABDBqQpwO5ZntcYKV2l3EgiJaxLBxpyvkMYoj5lwtBuizhkyQN+SUXPTp3jCjdy9cn0w==
+
 chalk@^4.0.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
