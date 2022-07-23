@@ -4,13 +4,22 @@
   box-sizing: border-box;
 }
 
-html {
-  background: black;
+/* canvas {
+  cursor: grab;
 }
+
+canvas:target {
+  cursor: grabbing;
+} */
 
 body {
   min-height: 100vh;
   width: 100vw;
   overflow: hidden;
   cursor: url('../public/textures/cursor.svg'), auto ;
+}
+
+#app {
+  width: inherit;
+  height: inherit;
 }

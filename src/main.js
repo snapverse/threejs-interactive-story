@@ -1,12 +1,12 @@
 // @ts-check
 import * as THREE from 'three'
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
-import { WINDOW_HEIGHT, WINDOW_WIDTH, LIMIT_MAX_X, LIMIT_MIN_X, LIMIT_MAX_Y, LIMIT_MIN_Y } from './constants'
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
+import controller from './controller'
 
-
-
-
-let scene, camera, renderer, controls, listener;
+let scene, camera, renderer, listener;
+/** @type {MapControls} */
+let controls;
 
 document.addEventListener('DOMContentLoaded', () => {
   init()
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function init() {
   scene = new THREE.Scene()
+  scene.background = new THREE.Color(0x7C6A56)
   listener = new THREE.AudioListener();
   camera = new THREE.PerspectiveCamera(70, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
   camera.add(listener)
@@ -30,25 +31,21 @@ function init() {
 
     return geometry
   }
-  
-  
-  
-  
+ 
   renderer = new THREE.WebGLRenderer()
-  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-  document.body.appendChild(renderer.domElement)
   
   setMapControls(getImageRatioPlane())
   addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: .09 });
+  document.querySelector("#app")?.appendChild(renderer.domElement)
 }
 
 function animate() {
-	requestAnimationFrame(animate);
-	renderer.render(scene, camera);
+  window.requestAnimationFrame(animate)
+  renderer.render(scene, camera)
   controls.update()
 }
-
 
 function addSound(listener, { path, loop, volume }) {
   const sound = new THREE.Audio( listener );
@@ -97,15 +94,4 @@ function setMapControls(geometry) {
     camera.position.sub(_v);
     console.log(controls.object.position)
   })
-
-  const createSnow = () => {
-    var map = new THREE.TextureLoader().load(snow);
-    var material = new THREE.SpriteMaterial({
-      map: map,
-      transparent: true,
-      opacity: 0.5,
-      color: 0xffffff,
-    });
-    return new THREE.Sprite(material);
-  };
 }
