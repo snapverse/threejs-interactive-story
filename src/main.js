@@ -1,9 +1,11 @@
 import * as THREE from 'three'
 import { MapControls } from 'three/examples/jsm/controls/OrbitControls';
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
-import controller from './controller'
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three';
+import MouseMeshInteraction from '@danielblagy/three-mmi';
+import controller from './controller';
+import { addPointsToMap } from './functions/points';
 
-let scene, camera, renderer, listener
+let scene, camera, renderer, listener, mmi
 /** @type {MapControls} */
 let controls;
 
@@ -16,16 +18,14 @@ function init() {
   scene = new THREE.Scene()
   scene.background = new THREE.Color(0x7C6A56)
   listener = new THREE.AudioListener()
-  camera = new THREE.PerspectiveCamera(
-    86,
-    WINDOW_WIDTH / WINDOW_HEIGHT,
-    1,
-    1000
-  )
   listener = new THREE.AudioListener();
   camera = new THREE.PerspectiveCamera(70, WINDOW_WIDTH / WINDOW_HEIGHT, 0.1, 1000);
   camera.add(listener)
   camera.position.set(0, -500, 5000);
+
+  mmi = new MouseMeshInteraction(scene, camera);
+  addPointsToMap(scene,mmi,{x:50,y:5,z:10});
+  addPointsToMap(scene,mmi,{x:100,y:5,z:10});
 
   const getImageRatioPlane = async () => {
     const texture = await new THREE.TextureLoader().loadAsync('./textures/map4.jpg');
@@ -50,6 +50,7 @@ function animate() {
   window.requestAnimationFrame(animate)
   renderer.render(scene, camera)
   controls.update()
+  mmi.update()
 }
 
 function addSound(listener, { path, loop, volume }) {
