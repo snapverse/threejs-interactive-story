@@ -97,6 +97,6 @@ function setMapControls(geometry) {
     controls.target.clamp(minPan, maxPan);
     _v.sub(controls.target);
     camera.position.sub(_v);
-    console.log(controls.object.position)
+    //console.log(controls.object.position)
   })
 }

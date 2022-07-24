@@ -11,11 +11,20 @@ export default customElements.define('x-header', class extends LitElement {
       width: 100%;
       height: 100px;
     }
+    .header-wrapper{
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 35px 10px 35px;
+      align-items: center;
+      z-index: 99;
+    }
   `
   render() {
     return html`
       <header class="header">
-        <slot></slot>
+      <div class="header-wrapper">
+      <slot></slot>
+      </div>
       </header>`
   }
 })
