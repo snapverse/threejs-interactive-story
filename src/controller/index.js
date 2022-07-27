@@ -10,10 +10,10 @@ const controlState = {
 }
 
 /** @type {(geometry, camera, renderer, clamp) => MapControls} */
-export default function controller (geometry, camera, renderer, clamp) {
+export default function controller(geometry, camera, renderer, clamp) {
   const { positionX, positionY, phi, theta } = controlState
   const controls = new MapControls(camera, renderer.domElement)
-  
+
   controls.screenSpacePanning = true
   controls.minDistance = 2
   controls.maxDistance = 5.2
@@ -21,11 +21,11 @@ export default function controller (geometry, camera, renderer, clamp) {
   controls.enableDamping = true
   controls.dampingFactor = 0.08
 
-  controls.enableZoom = true;
-  controls.rotateSpeed = 1.0;
-  controls.zoomSpeed = 1.2;
-  controls.panSpeed = 0.8;
-  
+  controls.enableZoom = true
+  controls.rotateSpeed = 1.0
+  controls.zoomSpeed = 1.2
+  controls.panSpeed = 0.8
+
   controls.maxPolarAngle = Math.PI / 2
   controls.enablePan = true
 
