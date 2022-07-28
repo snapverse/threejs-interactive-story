@@ -1,13 +1,15 @@
 import * as THREE from 'three'
-import CameraControls from 'camera-controls';
+import CameraControls from 'camera-controls'
+import MouseMeshInteraction from '@danielblagy/three-mmi'
 import controller from './controller'
-import { renderProportionalMap } from './functions/map';
-import { addBackgroundSound } from './functions/sound';
+import { renderProportionalMap } from './functions/map'
+import { addBackgroundSound } from './functions/sound'
 import { boundaryLimits, WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
+import { addPointsToMap } from './functions/points'
 
-let scene, camera, renderer, listener, clock, plane
+let scene, camera, renderer, listener, clock, plane, mmi
 /** @type {CameraControls} */
-let controls;
+let controls
 
 document.addEventListener('DOMContentLoaded', () => {
   init()
@@ -15,25 +17,34 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function init() {
-  CameraControls.install( { THREE: THREE } );
+  CameraControls.install({ THREE: THREE })
 
-  clock = new THREE.Clock();
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000);
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  clock = new THREE.Clock()
+  scene = new THREE.Scene()
+  scene.background = new THREE.Color(0x7c6a56)
+  camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  )
   camera.position.set(0, -90, 593)
 
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  mmi = new MouseMeshInteraction(scene, camera)
+  addPointsToMap(scene, mmi, { x: 50, y: 5, z: 10 })
+  addPointsToMap(scene, mmi, { x: 100, y: 5, z: 10 })
+
+  renderer = new THREE.WebGLRenderer()
+  renderer.setSize(window.innerWidth, window.innerHeight)
 
   plane = renderProportionalMap(scene)
 
   // addBackgroundSound(camera, { path: 'sounds/rain.mp3', loop: true, volume: .09 });
-  document.querySelector("#app")?.appendChild(renderer.domElement)
+  document.querySelector('#app')?.appendChild(renderer.domElement)
 
-  controls = new CameraControls(camera, renderer.domElement);
-  controls.dollyToCursor = true;
-  controls.dollySpeed = .2
+  controls = new CameraControls(camera, renderer.domElement)
+  controls.dollyToCursor = true
+  controls.dollySpeed = 0.2
   controls.azimuthRotateSpeed = 0
   controls.polarRotateSpeed = 0
   controls.draggingDampingFactor = 0.1
@@ -43,13 +54,13 @@ function init() {
   controls.boundaryFriction = 0
 }
 
-
 function animate() {
-  const delta = clock.getDelta();
-	const elapsed = clock.getElapsedTime();
-	const updated = controls.update(delta);
+  const delta = clock.getDelta()
+  const elapsed = clock.getElapsedTime()
+  const updated = controls.update(delta)
 
-	window.requestAnimationFrame( animate );
-  renderer.render( scene, camera );
-  controls.getTarget( plane.position );
-};
+  window.requestAnimationFrame(animate)
+  renderer.render(scene, camera)
+  controls.getTarget(plane.position)
+  mmi.update()
+}

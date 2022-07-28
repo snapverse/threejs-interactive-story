@@ -1,14 +1,13 @@
-//@ts-check
 import { Box3, Vector3 } from 'three'
 import CameraControls from 'camera-controls';
 
 /** @type {(camera, renderer) => CameraControls} */
-export default function controller (camera, renderer) {
-  const controls = new CameraControls(camera, renderer.domElement);
-  
+export default function controller(camera, renderer) {
+  const controls = new CameraControls(camera, renderer.domElement)
+
   // controls.screenSpacePanning = true
-  controls.minDistance = 200;
-  controls.maxDistance = 600;
+  controls.minDistance = 200
+  controls.maxDistance = 600
   // controls.enableRotate = false
   // controls.enableDamping = true
   controls.dampingFactor = 0.05
