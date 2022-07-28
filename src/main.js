@@ -4,8 +4,9 @@ import { WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
 import MouseMeshInteraction from '@danielblagy/three-mmi'
 import controller from './controller'
 import { addPointsToMap } from './functions/points'
+import * as TWEEN from '@tweenjs/tween.js';
 
-let scene, camera, renderer, listener, mmi
+let scene, camera, renderer, listener, mmi, mesh
 /** @type {MapControls} */
 let controls
 
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   animate()
 })
 
-function init() {
+async function init() {
   scene = new THREE.Scene()
   scene.background = new THREE.Color(0x7c6a56)
   listener = new THREE.AudioListener()
@@ -29,14 +30,30 @@ function init() {
   camera.position.set(0, -500, 5000)
 
   mmi = new MouseMeshInteraction(scene, camera)
-  addPointsToMap(scene, mmi, 'pueblo', { x: 50, y: 5, z: 10 }, () => {
+  const pointer1 = await addPointsToMap(scene, mmi, 'pueblo', { x: 50, y: 5, z: 10 }, () => {
       document
       .querySelector('#app > x-story')
       .shadowRoot.querySelector('#text').classList.toggle("show")  
   })
-  addPointsToMap(scene, mmi, 'bosque', { x: 200, y: 5, z: 10 }, () => {
+  const pointer2 = await addPointsToMap(scene, mmi, 'bosque', { x: 200, y: 5, z: 10 }, () => {
     console.log('hola1')
   })
+
+  /* const animate = (t) => {
+    TWEEN.update(t);
+    window.requestAnimationFrame(animate);
+  };
+  animate();
+  
+    const tween = new TWEEN.Tween({ x: 0, y: 0, xRotation: 0 })
+       .to({ x: 20, y: 20, xRotation: Math.PI / 2 }, 2000)
+       .onUpdate((coords) => {
+        pointer1.position.y = coords.y;
+       })
+       .easing(TWEEN.Easing.Exponential.InOut)
+       .repeat(Infinity)
+       .delay(500);
+     tween.start(); */
 
   const getImageRatioPlane = async () => {
     const texture = await new THREE.TextureLoader().loadAsync(
@@ -57,7 +74,17 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio)
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
 
-  addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: 0.09 })
+  function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+    renderer();
+
+  }
+  //addSound(listener, { path: 'sounds/rain.mp3', loop: true, volume: 0.09 })
   setMapControls(getImageRatioPlane())
   document.querySelector('#app')?.appendChild(renderer.domElement)
 }
