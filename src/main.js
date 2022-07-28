@@ -18,7 +18,6 @@ function init() {
   scene = new THREE.Scene()
   scene.background = new THREE.Color(0x7c6a56)
   listener = new THREE.AudioListener()
-  listener = new THREE.AudioListener()
   camera = new THREE.PerspectiveCamera(
     70,
     WINDOW_WIDTH / WINDOW_HEIGHT,
@@ -37,6 +36,10 @@ function init() {
   addPointsToMap(scene, mmi, 'bosque', { x: 200, y: 5, z: 10 }, () => {
     console.log('hola1')
   })
+
+  mmi = new MouseMeshInteraction(scene, camera);
+  addPointsToMap(scene,mmi,{x:50,y:5,z:10});
+  addPointsToMap(scene,mmi,{x:100,y:5,z:10});
 
   const getImageRatioPlane = async () => {
     const texture = await new THREE.TextureLoader().loadAsync(
@@ -114,6 +117,5 @@ function setMapControls(geometry) {
     controls.target.clamp(minPan, maxPan)
     _v.sub(controls.target)
     camera.position.sub(_v)
-    //console.log(controls.object.position)
   })
 }

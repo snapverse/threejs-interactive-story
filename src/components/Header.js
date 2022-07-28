@@ -25,7 +25,8 @@ export default customElements.define(
       }
     `
     render() {
-      return html` <header class="header">
+      return html
+      `<header class="header">
         <div class="header-wrapper">
           <slot></slot>
         </div>

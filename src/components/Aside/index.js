@@ -24,7 +24,7 @@ export default customElements.define(
     `
 
     render() {
-      return html` <aside id="aside" class="aside"></aside> `
+      return html`<aside id="aside" class="aside"></aside>`
     }
   }
 )
