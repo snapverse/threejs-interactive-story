@@ -8,10 +8,7 @@ export const styles = css`
   aspect-ratio: 5 / 5;
   width: 1.45rem;
   /* border: 2px solid rgba(255, 255, 255, 0.25); */
-  left: 30px;
-  top: 14px;
   border-radius: 100%;
-  z-index: 999;
   overflow: hidden;
   cursor: pointer;
 }

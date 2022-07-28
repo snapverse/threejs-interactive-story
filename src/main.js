@@ -43,7 +43,6 @@ function init() {
   controls.boundaryFriction = 0
 }
 
-
 function animate() {
   const delta = clock.getDelta();
 	const elapsed = clock.getElapsedTime();

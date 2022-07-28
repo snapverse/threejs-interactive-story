@@ -1,0 +1,60 @@
+{
+    "translation":[
+        {
+            "dialogue": [
+                1,4,5,6
+            ],
+            "guarani": "Mbya",
+            "translation": "pueblo indígena perteneciente a la familia lingüística guaraní que habita en Paraguay, sur de Brasil y en la provincia de Misiones en Argentina."
+        },
+        {
+            "dialogue": [
+                1
+            ],
+            "guarani": "Manguruju",
+            "translation": "variedad de pez de gran tamaño, sin escamas"
+        },
+        {
+            "dialogue": [
+                2
+            ],
+            "guarani": "Opy",
+            "translation": "casa de rezos"
+        },
+        {
+            "dialogue": [
+                3
+            ],
+            "guarani": "Ñande Ru Mirî",
+            "translation": "Nuestro Padre Menor."
+        },
+        {
+            "dialogue": [
+                2,3,5
+            ],
+            "guarani": "Kochi",
+            "translation": "pecarí labiado. Es un mamífero, una especie de cerdo montés, considerado animal doméstico de los dioses y la “pieza de caza” por antonomasia entre los mbya."       
+        },
+        {
+            "dialogue": [
+                3
+            ],
+            "guarani": "apyka verā",
+            "translation": "asientos relumbrantes"
+        },
+        {
+            "dialogue": [
+                3,4
+            ],
+            "guarani": "Opygua",
+            "translation": "líder religioso"
+        },
+        {
+            "dialogue": [
+                3
+            ],
+            "guarani": "verā",
+            "translation": "asientos relumbrantes"
+        }
+    ]
+}
