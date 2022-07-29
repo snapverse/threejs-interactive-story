@@ -1,5 +1,4 @@
 import { css, html, LitElement, svg } from 'lit'
-import { classMap } from 'lit/directives/class-map.js'
 import { styles } from './index.styles'
 
 export default customElements.define(

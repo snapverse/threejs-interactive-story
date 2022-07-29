@@ -1,10 +1,7 @@
-import { css, html, LitElement } from 'lit'
-import story from '../assets/story.json'
+import { css } from "lit";
+import { classMap } from 'lit/directives/class-map.js'
 
-export default customElements.define(
-  'x-story',
-  class extends LitElement {
-    static styles = css`
+export const styles = css`
       .blur {
         display:flex;
         position: absolute;
@@ -145,29 +142,85 @@ export default customElements.define(
         pointer-events: visible;
         opacity: 1;        
       }
+
+      .alert {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: 35px;
+        color: white;
+        font-size: 0.975rem;
+        font-family: 'Geo Graphic Ahand';
+        font-weight: 400;
+      }
+
+      .line-separator {
+        width: 40%;
+        height: 2px;
+        background: #1e1e1e;
+        margin: -5px 0 22px 0;
+      }
+
+      .objective {
+        height: 16px;
+        display: flex;
+        align-items: center;
+      }
+
+      .objectives {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .objective .container {
+        display: block;
+        position: relative;
+        padding-left: 24px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .objective .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      .objective .container .checkmark {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        background-color: none;
+        border-radius: 100%;
+        border: 1px solid white;
+      }
+      
+      .objective .container input:checked ~ .checkmark::after {
+        content: "✓";
+        position: absolute;
+        top: -11px;
+        left: 2px;
+        width: 10px;
+        color: #a6bfb1;
+      }
+
+      .alert-title {
+        font-size: 1rem;
+        font-family: 'Geo Graphic Ahand';
+        font-weight: 400;
+      }
     `
-    #toggleOpen() {
-      document
-      .querySelector('#app > x-story')
-      .shadowRoot.querySelector('#text').classList.toggle("show")
-    }
-
-
-    render() {
-      return html`
-        <div id="text" class="blur">
-          <div class="modal">
-            <button class="btn-cerrar" @click="${this.#toggleOpen}">   
-              <img class="cerrar" src="./textures/cerrar.png"/>
-            </button>
-            <div class="paragraphs-wrapper">
-              ${story[0].paragraphs.map(paragraph => (
-                html`<p class="paragraphs"> ${paragraph} </p>`
-                ))}
-              </div>
-          </div>
-        </div>
-      `
-    }
-  }
-)
