@@ -6,22 +6,12 @@
   box-sizing: border-box;
 }
 
-
-/* canvas {
-  cursor: grab;
-}
-
-canvas:target {
-  cursor: grabbing;
-} */
-
 body {
   min-height: 100vh;
   width: 100vw;
   overflow: hidden;
-  /*cursor: url('../public/textures/cursor.svg'), auto;*/
+  /* cursor: url('../public/textures/cursor.svg'), auto; */
   font-family: 'Inter', sans-serif;
-
 }
 
 #app {

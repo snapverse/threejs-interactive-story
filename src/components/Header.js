@@ -22,6 +22,7 @@ export default customElements.define(
         justify-content: space-between;
         padding: 10px 35px 10px 35px;
         align-items: center;
+        z-index: 99;
       }
     `
     render() {

@@ -36,22 +36,8 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
       window.requestAnimationFrame(animate);
     };
     animate();
-    
-      /* const tween = new TWEEN.Tween({ x: 0, y: 0, xRotation: 0 })
-         .to({ x: 20, y: 20, xRotation: Math.PI / 2 }, 2000)
-         .onUpdate((coords) => {
-          pointer.position.y = coords.y;
-         })
-         .easing(TWEEN.Easing.Exponential.InOut)
-         .repeat(Infinity)
-         .delay(500);
-       tween.start(); */
 
-
-
-
-
-       const tween1 = new TWEEN.Tween({ y: 60 })
+    const tween1 = new TWEEN.Tween({ y: 60 })
       .to({y: 70}, 2000)
       .onUpdate((coords) => {
         pointer.position.y = coords.y;
@@ -69,16 +55,9 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
     tween2.chain(tween1);
     tween1.start();
 
-
-
-
-
     scene.add(pointer);
-
     return pointer;
   }
 
   return Pointer();
-
-
 }
