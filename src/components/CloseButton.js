@@ -16,6 +16,7 @@ export default customElements.define(
         -o-transition: 0.5s ease-in-out;
         transition: 0.5s ease-in-out;
         cursor: pointer;
+        z-index: 9999;
       }
 
       .close-button span {

@@ -3,7 +3,8 @@
     "module": "commonjs",
     "target": "es6",
     "checkJs": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"]
 }

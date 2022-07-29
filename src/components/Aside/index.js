@@ -10,10 +10,10 @@ export default customElements.define(
         top: 0;
         width: 45%;
         height: 100%;
-        /*background-image: url(textures/paper.jpg);*/
+        background-image: url(textures/paper.jpg);
         background-color: #000;
         background-repeat: repeat;
-        z-index: 2;
+        z-index: 999;
         transform: translateX(100%);
         transition: transform 0.7s ease-in-out;
       }

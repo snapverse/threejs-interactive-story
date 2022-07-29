@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@danielblagy/three-mmi": "^1.0.0",
+    "@tweenjs/tween.js": "^18.6.4",
     "camera-controls": "1.35.0",
     "lit": "2.2.8",
     "three": "0.142.0"
