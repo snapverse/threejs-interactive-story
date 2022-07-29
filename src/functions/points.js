@@ -1,6 +1,5 @@
+import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader, Clock } from 'three'
 import MouseMeshInteraction from '@danielblagy/three-mmi'
-import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader } from 'three'
-import { Clock } from 'three'; 
 import * as TWEEN from '@tweenjs/tween.js';
 
 export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
@@ -19,7 +18,7 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
 
   mmi.addHandler(name, 'click', callback)
 
-  const Pointer = async () => {
+  const pointer = async () => {
     const texture = await new TextureLoader().loadAsync('./textures/point.png');
     const material = new MeshBasicMaterial({ map: texture });
     material.transparent = true
@@ -56,8 +55,7 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
     tween1.start();
 
     scene.add(pointer);
-    return pointer;
   }
 
-  return Pointer();
+  pointer();
 }

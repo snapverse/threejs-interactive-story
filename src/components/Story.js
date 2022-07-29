@@ -66,7 +66,8 @@ export default customElements.define(
         //text-align: justify;
         font-size: 2.5rem;
         line-height: 1.2;
-        font-family: AntiquarianScribeW01-Reg;
+        font-family: 'Antiquarian Scribe';
+        font-weight: 400;
         margin:0px 0 0 17px;
         
         

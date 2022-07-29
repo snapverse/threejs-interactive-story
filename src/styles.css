@@ -6,6 +6,12 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: 'Antiquarian Scribe';
+  font-weight: 400;
+  src: url('/fonts/Antiquarian_Scribe_Regular.ttf') format('truetype');
+}
+
 body {
   min-height: 100vh;
   width: 100vw;

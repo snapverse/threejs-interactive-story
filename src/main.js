@@ -1,3 +1,5 @@
+import * as THREE from 'three'
+import * as TWEEN from '@tweenjs/tween.js';
 import CameraControls from 'camera-controls'
 import MouseMeshInteraction from '@danielblagy/three-mmi'
 import controller from './controller'
@@ -5,7 +7,6 @@ import { renderProportionalMap } from './functions/map'
 import { addBackgroundSound } from './functions/sound'
 import { boundaryLimits, WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
 import { addPointsToMap } from './functions/points'
-import * as TWEEN from '@tweenjs/tween.js';
 
 let scene, camera, renderer, listener, clock, plane, mmi, mesh
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   animate()
 })
 
-async function init() {
+function init() {
   CameraControls.install({ THREE: THREE })
 
   clock = new THREE.Clock()
@@ -32,12 +33,12 @@ async function init() {
   camera.position.set(0, -90, 593)
 
   mmi = new MouseMeshInteraction(scene, camera)
-  await addPointsToMap(scene, mmi, 'pueblo', { x: 50, y: 5, z: 10 }, () => {
+  addPointsToMap(scene, mmi, 'pueblo', { x: 50, y: 5, z: 10 }, () => {
       document
       .querySelector('#app > x-story')
       .shadowRoot.querySelector('#text').classList.toggle("show")  
   })
-  await addPointsToMap(scene, mmi, 'bosque', { x: 200, y: 5, z: 10 }, () => {
+  addPointsToMap(scene, mmi, 'bosque', { x: 200, y: 5, z: 10 }, () => {
     console.log('hola1')
   })
 
