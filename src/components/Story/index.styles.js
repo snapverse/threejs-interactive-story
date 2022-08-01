@@ -77,9 +77,8 @@ export const styles = css`
         padding: 27px 0 0 0;
       }
 
-    
       .to-translate{
-        font-weigth: 300;
+        font-weight: 300;
       }
 
       .show{
@@ -167,6 +166,10 @@ export const styles = css`
         height: 16px;
         display: flex;
         align-items: center;
+      }
+
+      .objective .done {
+        text-decoration: line-through;
       }
 
       .objectives {

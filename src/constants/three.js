@@ -6,7 +6,7 @@ export const WINDOW_HEIGHT = window.innerHeight
 const boundaryLimitsState = {
   left: -160,
   bottom: -115,
-  rigth: 150,
+  rigth: 115,
   top: 5
 }
 
