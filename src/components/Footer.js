@@ -11,7 +11,7 @@ export default customElements.define(
         background: linear-gradient(
           180deg,
           rgba(0, 0, 0, 0) 25%,
-          rgba(0, 0, 0, 0.2) 100%
+          rgba(0, 0, 0, 0.35) 100%
         );
         z-index: 99;
         width: 100%;
@@ -20,7 +20,9 @@ export default customElements.define(
     `
 
     render() {
-      return html`<footer class="footer"></footer>`
+      return html`<footer class="footer">
+        <slot></slot>
+      </footer>`
     }
   }
 )

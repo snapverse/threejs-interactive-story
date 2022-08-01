@@ -4,5 +4,6 @@ import Mute from './Mute'
 import Aside from './Aside'
 import CloseButton from './CloseButton'
 import Story from './Story'
+import ProgressiveBar from './ProgressiveBar'
 
-export default { Header, Footer, Mute, Aside, CloseButton, Story }
+export default { Header, Footer, Mute, Aside, CloseButton, Story, ProgressiveBar }

@@ -166,6 +166,11 @@ export const styles = css`
         height: 16px;
         display: flex;
         align-items: center;
+        margin-top: 20px;
+      }
+
+      .objective .done {
+        text-decoration: line-through;
       }
 
       .objective .done {
@@ -187,9 +192,6 @@ export const styles = css`
         margin-bottom: 12px;
         cursor: pointer;
         font-size: 22px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
         user-select: none;
       }
 
@@ -203,10 +205,9 @@ export const styles = css`
 
       .objective .container .checkmark {
         position: absolute;
-        top: -2px;
         left: 0;
-        height: 15px;
-        width: 15px;
+        height: 9px;
+        width: 9px;
         background-color: none;
         border-radius: 100%;
         border: 1px solid white;

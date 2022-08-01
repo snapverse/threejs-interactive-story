@@ -2,7 +2,7 @@ import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeomet
 import * as TWEEN from '@tweenjs/tween.js';
 import MouseMeshInteraction from '@danielblagy/three-mmi'
 import CameraControls from 'camera-controls';
-import { getElementFromShadow } from '../components/helpers/getElementFromShadow';
+import { getElementFromShadow } from '../helpers/getElementFromShadow';
 
 /** @type {(scene: Scene, mmi: MouseMeshInteraction, controls: CameraControls, name: string, { x, y, z }: { x: number, y: number, z: number }) => void} */
 export function addPointer(scene, mmi, controls, name, { x, y, z }) {
@@ -70,9 +70,7 @@ export function addPointer(scene, mmi, controls, name, { x, y, z }) {
       .shadowRoot.querySelector('#text').classList.toggle("show")  
   })
 
-  getElementFromShadow('story', '#text').addEventListener('click', () => {
-    controls.setLookAt(0, -90, 593, 0, 0, 0, true)
-  })
+  getElementFromShadow('story', '#text').addEventListener('click', () => controls.setLookAt(0, -90, 593, 0, 0, 0, true))
 
   pointer()
 }
