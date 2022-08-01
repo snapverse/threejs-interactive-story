@@ -173,6 +173,10 @@ export const styles = css`
         text-decoration: line-through;
       }
 
+      .objective .done {
+        text-decoration: line-through;
+      }
+
       .objectives {
         display: flex;
         align-items: flex-start;
