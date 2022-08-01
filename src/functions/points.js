@@ -1,29 +1,19 @@
-import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader, Clock } from 'three'
-import MouseMeshInteraction from '@danielblagy/three-mmi'
+import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader, Clock, Scene } from 'three'
 import * as TWEEN from '@tweenjs/tween.js';
+import MouseMeshInteraction from '@danielblagy/three-mmi'
+import CameraControls from 'camera-controls';
+import { getElementFromShadow } from '../components/helpers/getElementFromShadow';
 
-export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
-  let segmentCount = 32,
-    radius = 30
-  const geometry = new CircleGeometry(radius, segmentCount)
-  const material = new MeshBasicMaterial({ color: 0xffffff })
-  const point = new Mesh(geometry, material)
-
-  point.translateX(x)
-  point.translateY(y)
-  point.translateZ(z)
-
-  point.name = name
-  scene.add(point)
-
-  mmi.addHandler(name, 'click', callback)
-
+/** @type {(scene: Scene, mmi: MouseMeshInteraction, controls: CameraControls, name: string, { x, y, z }: { x: number, y: number, z: number }) => void} */
+export function addPointer(scene, mmi, controls, name, { x, y, z }) {
   const pointer = async () => {
-    const texture = await new TextureLoader().loadAsync('./textures/point.png');
+    const texture = await new TextureLoader().loadAsync('./textures/point.png')
+
     const material = new MeshBasicMaterial({ map: texture });
-    material.transparent = true
-    material.needsUpdate = true
     const geometry = new PlaneGeometry(texture.image.width/4, texture.image.height/4);
+
+    material.transparent = true 
+    material.needsUpdate = true
 
     const pointer = new Mesh(geometry, material);
     pointer.translateX(x)
@@ -57,5 +47,32 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
     scene.add(pointer);
   }
 
-  pointer();
+  const circleState = {
+    segmentCount: 32,
+    radius: 30
+  } 
+
+  const geometry = new CircleGeometry(circleState.radius, circleState.segmentCount)
+  const material = new MeshBasicMaterial({ color: 0xffffff })
+  const point = new Mesh(geometry, material)
+
+  point.translateX(x)
+  point.translateY(y)
+  point.translateZ(z)
+
+  point.name = name
+  scene.add(point)
+
+  mmi.addHandler(name, 'click', () => {
+    controls.fitToBox(point, true, { paddingRight: 300 })
+    document
+      .querySelector('#app > x-story')
+      .shadowRoot.querySelector('#text').classList.toggle("show")  
+  })
+
+  getElementFromShadow('story', '#text').addEventListener('click', () => {
+    controls.setLookAt(0, -90, 593, 0, 0, 0, true)
+  })
+
+  pointer()
 }
