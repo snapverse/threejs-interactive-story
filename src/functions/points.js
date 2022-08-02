@@ -1,14 +1,14 @@
-import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader, Clock } from 'three'
+import { Camera, CircleGeometry, MathUtils, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader, Clock, MeshLambertMaterial, SphereGeometry } from 'three'
 import MouseMeshInteraction from '@danielblagy/three-mmi'
 import * as TWEEN from '@tweenjs/tween.js';
 
-export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
-  let segmentCount = 32,
-    radius = 30
+export function addPointsToMap(scene, mmi, name, { x, y, z , zpointer = 11, radius=30}, callback) {
+  let segmentCount = 32
   const geometry = new CircleGeometry(radius, segmentCount)
-  const material = new MeshBasicMaterial({ color: 0xffffff })
+  const material = new MeshBasicMaterial({ opacity:0 })
+  material.transparent = true
   const point = new Mesh(geometry, material)
-
+  
   point.translateX(x)
   point.translateY(y)
   point.translateZ(z)
@@ -19,7 +19,7 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
   mmi.addHandler(name, 'click', callback)
 
   const pointer = async () => {
-    const texture = await new TextureLoader().loadAsync('./textures/point.png');
+    const texture = await new TextureLoader().loadAsync('./textures/point1.png');
     const material = new MeshBasicMaterial({ map: texture });
     material.transparent = true
     material.needsUpdate = true
@@ -28,7 +28,7 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
     const pointer = new Mesh(geometry, material);
     pointer.translateX(x)
     pointer.translateY(y+40)
-    pointer.translateZ(11)
+    pointer.translateZ(zpointer)
     
     const animate = (t) => {
       TWEEN.update(t);
@@ -36,15 +36,15 @@ export function addPointsToMap(scene, mmi, name, { x, y, z }, callback) {
     };
     animate();
 
-    const tween1 = new TWEEN.Tween({ y: 60 })
-      .to({y: 70}, 2000)
+    const tween1 = new TWEEN.Tween({ y: y+70 })
+      .to({y: y+60}, 2000)
       .onUpdate((coords) => {
         pointer.position.y = coords.y;
       })
       .easing(TWEEN.Easing.Quadratic.In)
       .delay(0);
-    const tween2 = new TWEEN.Tween({ y: 70 })
-      .to({ x: 0, y: 60, xRotation: 0 }, 2000)
+    const tween2 = new TWEEN.Tween({ y: y+60 })
+      .to({ y: y+70 }, 2000)
       .onUpdate((coords) => {
         pointer.position.y = coords.y;
       })
