@@ -105,7 +105,7 @@ function init() {
     })
     let segmentCount = 32,radius = 100
     const geometry = new THREE.BoxGeometry( sphereradius, sphereWidh,sphereheight);
-    const material = new THREE.MeshBasicMaterial({ opacity:0.5 })
+    const material = new THREE.MeshBasicMaterial({ opacity:0 })
     material.transparent = true
     const circleSound = new THREE.Mesh(geometry, material)
     circleSound.add(sound)
