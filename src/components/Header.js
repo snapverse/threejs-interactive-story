@@ -13,7 +13,7 @@ export default customElements.define(
           rgba(0, 0, 0, 0) 15%,
           rgba(0, 0, 0, 0.65) 100%
         );
-        z-index: 99;
+        z-index: 9999999;
         width: 100%;
         height: 100px;
       }
@@ -22,7 +22,6 @@ export default customElements.define(
         justify-content: space-between;
         padding: 10px 35px 10px 35px;
         align-items: center;
-        z-index: 99;
       }
     `
     render() {

@@ -10,7 +10,6 @@ export default customElements.define(
         border: 2px solid rgba(255, 255, 255, 1);
         top: 50%;
         left: 0;
-        width: 188.28125px;
         transform: translateY(-50%);
         transition: width 800ms ease-in-out;
       }
@@ -44,6 +43,11 @@ export default customElements.define(
         transform: scale(1.35);
       }
     `
+
+    firstUpdated() {
+      const initialCircleWidth = this.renderRoot.querySelector('.curr-0').getBoundingClientRect().x
+      this.renderRoot.querySelector("#current-progress").style.width = `${initialCircleWidth}px`
+    }
 
     render() {
       return html`

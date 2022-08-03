@@ -39,7 +39,6 @@ export default customElements.define(
       this.objective = story[this.extraCounter]?.alert
       getElementFromShadow('progressive-bar', '#current-progress').style.width = `${currCircleWidth}px`
     }
-    
 
     render() {
       return html`
