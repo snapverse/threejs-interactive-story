@@ -5,5 +5,6 @@ import Aside from './Aside'
 import CloseButton from './CloseButton'
 import Story from './Story'
 import ProgressiveBar from './ProgressiveBar'
+import Intro from './Intro'
 
-export default { Header, Footer, Mute, Aside, CloseButton, Story, ProgressiveBar }
+export default { Header, Footer, Mute, Aside, CloseButton, Story, ProgressiveBar, Intro }
