@@ -22,6 +22,10 @@
   src: url('/fonts/Geo_Graphic_Ahand.otf') format('opentype');
 }
 
+.iteractions-disabled {
+  pointer-events: none;
+}
+
 body {
   min-height: 100vh;
   width: 100vw;

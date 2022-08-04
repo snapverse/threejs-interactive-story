@@ -1,4 +1,5 @@
 import { css, html, LitElement } from 'lit'
+import { unsafeHTML } from 'lit-html/directives/unsafe-html.js'
 import story from '../../assets/story.json'
 import { WINDOW_WIDTH } from '../../constants/three'
 import { getElementFromShadow } from '../../helpers/getElementFromShadow'
@@ -9,34 +10,35 @@ export default customElements.define(
   class extends LitElement {
     constructor() {
       super()
-      this.counter = 0
-      this.extraCounter = 0
-      this.objective = "Buscá la morada de Ñande Ru Mirî en el mapa."
+      this.storyCounter = 1
+      this.progressiveCounter = -1
+      this.alertCounter = 0
+      this.objective = "Reviví conmigo la ceremonia secreta de los mbya visitando ahora la Casa de rezos (Opy)"
     }
 
     static styles = [styles]
 
     static properties = {
-      counter: {},
+      storyCounter: {},
       objective: {},
       extraCounter: {}
     }
 
     #toggleOpen() {
-      if (this.counter < story.length) {  
-        this.extraCounter++
-
+      if (this.storyCounter < story.length) {  
+        this.progressiveCounter++
+        this.alertCounter++
+        
         setTimeout(() => {
-          this.counter++
+          this.storyCounter++
           this.renderRoot.querySelector(".paragraphs-wrapper").scrollTo(0, 0)
-        }, 500)
+        }, 1000)
       }
       
       this.renderRoot.querySelector("#text").classList.toggle("show")
-      const currCircleWidth = getElementFromShadow('progressive-bar', `.curr-${this.extraCounter}`)?.getBoundingClientRect().x ?? WINDOW_WIDTH
+      const currCircleWidth = getElementFromShadow('progressive-bar', `.curr-${this.progressiveCounter}`)?.getBoundingClientRect().x ?? WINDOW_WIDTH
       
-
-      this.objective = story[this.extraCounter]?.alert
+      this.objective = story[this.alertCounter]?.alert
       getElementFromShadow('progressive-bar', '#current-progress').style.width = `${currCircleWidth}px`
     }
 
@@ -53,13 +55,13 @@ export default customElements.define(
         </section>
         <div id="text" class="blur">
           <div class="modal">
-            <button class="btn-cerrar" @click="${this.#toggleOpen}">   
+            <button class="btn-cerrar" id="close-button-story" @click="${this.#toggleOpen}">   
               <img class="cerrar" src="./textures/cerrar.png"/>
             </button>
-            <div class="paragraphs-wrapper">
-              ${story[this.counter]?.paragraphs.map(paragraph => (
-                html`<p class="paragraphs"> ${paragraph} </p>`
-              ))}
+              <div class="paragraphs-wrapper">
+                ${story[this.storyCounter]?.paragraphs.map(paragraph => (
+                  html`<p class="paragraphs">${unsafeHTML(paragraph)}</p>`
+                ))}
               </div>
           </div>
         </div>
