@@ -191,6 +191,59 @@ export default customElements.define(
       .paragraphs::-webkit-scrollbar-track {
         border-radius: 10px;  
       }
+      .to-translate {
+        margin: 0;
+        display: inline;
+        text-decoration: underline;
+        position: relative;
+      }
+
+      .to-translate:hover .translation {
+        display: block;
+      }
+
+      .translation {
+        display: none;
+        background-color: rgb(53, 53, 53);
+        border-bottom: 2px solid black;
+        padding: 16px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 46px;
+        width: 270px;
+        height: auto;
+        font-size: 1rem;
+        font-family: 'Geo Graphic Ahand';
+        font-weight: 300;
+        border-radius: 5px;
+        color: white;
+      }
+
+      .translation > div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+        margin-bottom: 12px;
+      }
+
+      .translation > div svg {
+        width: 22px;
+        cursor: pointer;
+      }
+
+      .translation > div .separator {
+        height: 20px;
+        border-right: 1px solid white;
+        margin-inline: 8px;
+      }
+
+      .translation > div p {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0;
+      }
     `
 
     firstUpdated() {
@@ -208,21 +261,31 @@ export default customElements.define(
           // @ts-ignore
           this.renderRoot.querySelector('#start-text').style.opacity = 1
         } 
-      }, 12000/144)        
+      }, 10000/144)        
     }
 
-    startHandler() {
+    startHandler(evt) {
+      
       if (!this.isStarted) return
+      
+      evt.preventDefault()
+      evt.stopPropagation()
       // @ts-ignore
       this.renderRoot.querySelector('.logo').style.opacity = 0
       this.renderRoot.querySelector('.percent').style.opacity = 0
+
+      setTimeout(() => {
+        this.renderRoot.querySelector('.percent').style.display = "none"
+      }, 800)
+
       this.renderRoot.querySelector('.paragraphs').classList.add('intro-show')
       this.renderRoot.querySelector('.continue-button').classList.add('intro-show')
     }
     
     continueHandler() {
       if (!this.isStarted) return
-      this.renderRoot.querySelector('.intro-hero').classList.add('intro-hide')
+      this.renderRoot.querySelector('.intro-hero').classList.add('intro-hide')      
+
       setTimeout(() => {
         // @ts-ignore
         this.renderRoot.querySelector('.intro-hero').style.display = "none"

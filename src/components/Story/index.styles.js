@@ -27,7 +27,6 @@ export const styles = css`
         position: relative;
         top: 35px;
         right: 10px;
-
         background-image: url(./textures/paper-antique.png);
         background-size: 45em;
         background-repeat: no-repeat;
@@ -222,5 +221,60 @@ export const styles = css`
         font-size: 1rem;
         font-family: 'Geo Graphic Ahand';
         font-weight: 400;
+      }
+
+      .to-translate {
+        margin: 0;
+        display: inline;
+        text-decoration: underline;
+        position: relative;
+      }
+
+      .to-translate:hover .translation {
+        display: block;
+      }
+
+      .translation {
+        display: none;
+        background-color: rgb(53, 53, 53);
+        border-bottom: 2px solid black;
+        padding: 16px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 46px;
+        width: 270px;
+        height: auto;
+        font-size: 1rem;
+        font-family: 'Geo Graphic Ahand';
+        font-weight: 300;
+        border-radius: 5px;
+        color: white;
+        -webkit-text-stroke: 0;
+      }
+
+      .translation > div {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+        margin-bottom: 12px;
+      }
+
+      .translation > div svg {
+        width: 22px;
+        cursor: pointer;
+      }
+
+      .translation > div .separator {
+        height: 20px;
+        border-right: 1px solid white;
+        margin-inline: 8px;
+      }
+
+      .translation > div p {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0;
       }
     `
