@@ -7,54 +7,49 @@ import { renderProportionalMap } from './functions/map'
 import { addBGMusic, soundsCircle } from './functions/sound'
 import { addPointer} from './functions/points'
 import { boundaryLimits, WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
+import { getElementFromShadow } from './helpers/getElementFromShadow';
 
+/** @type {THREE.Scene} */
 let scene, camera, renderer, listener, clock, plane, mmi, mesh
-
 /** @type {CameraControls} */
 let controls
+
+let counter = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
   init()
   animate()
 })
 
-function init() {
+async function init() {
   CameraControls.install({ THREE: THREE })
 
   camera = new THREE.PerspectiveCamera(
     75,
     WINDOW_WIDTH / WINDOW_HEIGHT,
-    0.1,
+    1,
     1000
   )
-camera.position.set(0, -90, 593)
+  camera.position.set(0, -90, 593)
 
   clock = new THREE.Clock()
   scene = new THREE.Scene()
   mmi = new MouseMeshInteraction(scene, camera)
   renderer = new THREE.WebGLRenderer()
-  controls = controller(camera, renderer)
-  
-  scene.background = new THREE.Color(0x7c6a56)  
+    
+  scene.background = new THREE.Color(0x7c6a56)
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
-
-  addPointer(scene, mmi, controls, 'montaña', {  x: 175, y: 100, z: 10, zpointer:20, radius:70 })
-  addPointer(scene, mmi, controls, 'opy', { x: 70, y: 3, z: 10, radius: 30 })
-  addPointer(scene, mmi, controls, 'aldea', {  x: -20, y: -10, z: 10, radius:70 })
-  addPointer(scene, mmi, controls, 'selva', {  x: -2, y: 140, z: 10, zpointer:30, radius:70})
-  addPointer(scene, mmi, controls, 'cerros', {  x: -130, y: -300, z: 10, radius:70 })
-
-  renderer = new THREE.WebGLRenderer()
-  renderer.setSize(window.innerWidth, window.innerHeight)
   
   plane = renderProportionalMap(scene)
+
+
   
-  soundsCircle(camera,scene,{ path: 'sounds/tala.mp3',  loop: true, volume:300  ,distance:0.005, one: 360, two: 120, three: 0.1,play:0},-400,120,100, 300,150,170);
-  soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300 , distance:0.005, one: 360, two: 120, three: 0.1,play:1},-400,120,100, 300,150,170);
-  soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:5},-400,120,100, 300,150,170);
-  soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:10},-400,120,100, 300,150,170);
-  soundsCircle(camera,scene,{ path: 'sounds/tala3.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:8},-400,120,100, 300,150,170);
-  soundsCircle(camera,scene,{ path: 'sounds/tala4.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:12},-400,120,100, 300,150,170);
+  // soundsCircle(camera,scene,{ path: 'sounds/tala.mp3',  loop: true, volume:300  ,distance:0.005, one: 360, two: 120, three: 0.1,play:0},-400,120,100, 300,150,170);
+  // soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300 , distance:0.005, one: 360, two: 120, three: 0.1,play:1},-400,120,100, 300,150,170);
+  // soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:5},-400,120,100, 300,150,170);
+  // soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:10},-400,120,100, 300,150,170);
+  // soundsCircle(camera,scene,{ path: 'sounds/tala3.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:8},-400,120,100, 300,150,170);
+  // soundsCircle(camera,scene,{ path: 'sounds/tala4.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:12},-400,120,100, 300,150,170);
 
   // soundsCircle(camera,scene,{ path: 'sounds/bosque.mp3',         loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,100, 200,100,170);
   // soundsCircle(camera,scene,{ path: 'sounds/bosque2.mp3',        loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,80, 200,100,170);
@@ -79,16 +74,47 @@ camera.position.set(0, -90, 593)
 
   document.querySelector('#app')?.appendChild(renderer.domElement)
 
-  controls = new CameraControls(camera, renderer.domElement)
-  controls.dollyToCursor = true
-  controls.dollySpeed = 0.2
-  controls.azimuthRotateSpeed = 0
-  controls.polarRotateSpeed = 0
-  controls.draggingDampingFactor = 0.1
-  controls.maxZoom = 500
-  controls.minZoom = 200
-  controls.setBoundary(boundaryLimits)
-  controls.boundaryFriction = 1
+  controls = controller(camera, renderer)
+
+  const { point: point1, pointer: pointer1 } = await addPointer(mmi, controls, 'opy', { x: 70, y: 3, z: 10, radius: 30 })
+  const { point: point2, pointer: pointer2 } = await addPointer(mmi, controls, 'montaña', {  x: 175, y: 100, z: 10, zpointer:20, radius:70 })
+  const { point: point3, pointer: pointer3 } = await addPointer(mmi, controls, 'opy', { x: 70, y: 3, z: 10, radius: 30 })
+  const { point: point4, pointer: pointer4 } = await addPointer(mmi, controls, 'aldea', {  x: -20, y: -10, z: 10, radius:70 })
+  const { point: point5, pointer: pointer5 } = await addPointer(mmi, controls, 'selva', {  x: -2, y: 140, z: 10, zpointer:30, radius:70})
+  const { point: point6, pointer: pointer6 } = await addPointer(mmi, controls, 'cerros', {  x: -130, y: -300, z: 10, radius:70 })
+
+  scene.add(point1, pointer1)
+  getElementFromShadow('story', '#close-button-story').addEventListener('click', evt => {
+    evt.preventDefault()
+    evt.stopPropagation()
+    counter += 1
+
+    switch (counter) {
+      case 1:
+        scene.remove(point1, pointer1)
+        scene.add(point2, pointer2)
+        break;
+      case 2:
+        scene.remove(point2, pointer2)
+        scene.add(point3, pointer3)
+        break;
+      case 3:
+        scene.remove(point3, pointer3)
+        scene.add(point4, pointer4)
+        break;
+      case 4:
+        scene.remove(point4, pointer4)
+        scene.add(point5, pointer5)
+        break;
+      case 5:
+        scene.remove(point5, pointer5)
+        scene.add(point6, pointer6)
+        break;
+      case 6:
+        scene.remove(point6, pointer6)
+        break;
+    }
+  })
 }
 
 function animate() {
@@ -98,7 +124,6 @@ function animate() {
 
   window.requestAnimationFrame(animate)
   renderer.render(scene, camera)
-  controls.getTarget(plane.position)
   mmi.update()
 }
 

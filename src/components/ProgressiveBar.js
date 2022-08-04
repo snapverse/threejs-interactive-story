@@ -10,8 +10,9 @@ export default customElements.define(
         border: 2px solid rgba(255, 255, 255, 1);
         top: 50%;
         left: 0;
+        width: 0;
         transform: translateY(-50%);
-        transition: width 800ms ease-in-out;
+        transition: width 1000ms ease-in-out;
       }
 
       .progressive-bar-story {
@@ -44,17 +45,12 @@ export default customElements.define(
       }
     `
 
-    firstUpdated() {
-      const initialCircleWidth = this.renderRoot.querySelector('.curr-0').getBoundingClientRect().x
-      this.renderRoot.querySelector("#current-progress").style.width = `${initialCircleWidth}px`
-    }
-
     render() {
       return html`
         <span class="progressive-bar-story">
           <span id="current-progress"></span>
           <div class="progressive-wrapper">
-            ${story.map((story, i) => html`<span class="progressive-circle curr-${i++}"></span>`)}
+            ${story.slice(1,6).map((story, i) => html`<span class="progressive-circle curr-${i++}"></span>`)}
           </div>
         </span>
       `
