@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://code.createjs.com/1.0.0/tweenjs.min.js"></script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +9,8 @@
   </head>
   <body>
     <div id="app">
+      <div id="particles"></div>
+
       <x-intro></x-intro>
       <x-story></x-story>
       <x-header>
@@ -21,6 +22,7 @@
         <x-progressive-bar></x-progressive-bar>
       </x-footer>
     </div>
+    <script type="module" src="/js/particles.js/package/particles.js"></script>
     <script type="module" src="/src/components/index.js"></script>
     <script type="module" src="/src/main.js"></script>
   </body>

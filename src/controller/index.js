@@ -12,7 +12,7 @@ export default function controller(camera, renderer) {
     controls.draggingDampingFactor = 0.1
     controls.maxDistance = 600
     controls.minDistance = 200
-    controls.setBoundary(boundaryLimits)
+    //controls.setBoundary(boundaryLimits)
     controls.boundaryFriction = 0
 
     return controls

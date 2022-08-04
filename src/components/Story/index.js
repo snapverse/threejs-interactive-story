@@ -9,7 +9,7 @@ export default customElements.define(
   class extends LitElement {
     constructor() {
       super()
-      this.counter = 0
+      this.counter = 1
       this.extraCounter = 0
       this.objective = "Buscá la morada de Ñande Ru Mirî en el mapa."
     }
