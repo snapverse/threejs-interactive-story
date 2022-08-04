@@ -39,7 +39,8 @@ export default customElements.define(
         width: 100%;
         height: 100%;
         position: absolute;
-        background: #181715;
+        background: url("./textures/fondo.jpg");
+        //background: #181715;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -147,6 +148,7 @@ export default customElements.define(
         color: white;
         cursor: pointer;
         transition: opacity 700ms 600ms ease;
+        font-family: 'Geo Graphic Ahand';
       }
 
       .continue-button p {
@@ -161,6 +163,34 @@ export default customElements.define(
         margin-right: 12px;
       }
 
+      .logo{
+        width:750px;
+        opacity: 1;
+        pointer-events:none;
+        transition: opacity 700ms
+      }
+
+      .paragraphs::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+
+      .paragraphs::-webkit-scrollbar:vertical {
+        width:10px;
+        
+      }
+      
+      .paragraphs::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+        display: none;
+      } 
+      
+      .paragraphs::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.25);
+        border-radius: 20px;
+      }
+
+      .paragraphs::-webkit-scrollbar-track {
+        border-radius: 10px;  
+      }
       .to-translate {
         margin: 0;
         display: inline;
@@ -214,7 +244,6 @@ export default customElements.define(
         font-weight: 500;
         margin: 0;
       }
-
     `
 
     firstUpdated() {
@@ -222,23 +251,27 @@ export default customElements.define(
       
       const progression = setInterval(() => {
         this.currentPercent++
+        // @ts-ignore
         root.style.setProperty('--percent', this.currentPercent);
 
         if (this.currentPercent > 99) {
           clearInterval(progression)
           this.isStarted = true;
           this.renderRoot.querySelector('.percent').classList.add('tocheable')
+          // @ts-ignore
           this.renderRoot.querySelector('#start-text').style.opacity = 1
         } 
-      }, 100/144)
+      }, 10000/144)        
     }
 
     startHandler(evt) {
+      
       if (!this.isStarted) return
-
+      
       evt.preventDefault()
       evt.stopPropagation()
-      
+      // @ts-ignore
+      this.renderRoot.querySelector('.logo').style.opacity = 0
       this.renderRoot.querySelector('.percent').style.opacity = 0
 
       setTimeout(() => {
@@ -248,15 +281,16 @@ export default customElements.define(
       this.renderRoot.querySelector('.paragraphs').classList.add('intro-show')
       this.renderRoot.querySelector('.continue-button').classList.add('intro-show')
     }
-
+    
     continueHandler() {
       if (!this.isStarted) return
       this.renderRoot.querySelector('.intro-hero').classList.add('intro-hide')      
 
       setTimeout(() => {
+        // @ts-ignore
         this.renderRoot.querySelector('.intro-hero').style.display = "none"
       }, 800)
-    }
+    }    
 
     render() {
       return html`
@@ -267,6 +301,7 @@ export default customElements.define(
             ))}
           </section>
           <button class="continue-button" @click="${this.continueHandler}"><p>CONTINUAR</p>${unsafeHTML(ArrowIcon)}</button>
+          <img  class="logo" alt="logo" src="./textures/logo.png">
           <span class="percent" @click="${this.startHandler}">
             <p id="start-text">INICIAR</p>
             <svg>

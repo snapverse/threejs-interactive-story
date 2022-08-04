@@ -25,6 +25,7 @@
     "camera-controls": "1.35.0",
     "lit": "2.2.8",
     "lit-html": "2.2.7",
+    "particles.js": "2.0.0",
     "three": "0.142.0"
   }
 }

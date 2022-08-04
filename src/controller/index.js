@@ -23,7 +23,7 @@ export default function controller(camera, renderer) {
     controls.maxDistance = 600
     controls.minDistance = 200
     // controls.boundaryEnclosesCamera = true
-    // controls.setBoundary(boundaryLimits)
+    //controls.setBoundary(boundaryLimits)
     controls.boundaryFriction = 0
 
     // controls.addEventListener('update', evt => {
