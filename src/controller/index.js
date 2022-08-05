@@ -21,17 +21,17 @@ export default function controller(camera, renderer) {
     controls.polarRotateSpeed = 0
     controls.draggingDampingFactor = 0.1
     controls.maxDistance = 600
-    controls.minDistance = 200
-    // controls.boundaryEnclosesCamera = true
-    //controls.setBoundary(boundaryLimits)
-    controls.boundaryFriction = 0
+    controls.minDistance = 100
+    controls.boundaryEnclosesCamera = true
+    // controls.setBoundary(boundaryLimits)
+    // controls.boundaryFriction = 0
 
     // controls.addEventListener('update', evt => {
-    //     evt.target.setBoundary(new Box3(
-    //         new Vector3(left+=20, bottom+=20, 0),
-    //         new Vector3(rigth+=20, top+=20, 0)
-    //       ))
-    // })
+    //      evt.target.setBoundary(new Box3(
+    //          new Vector3(left+=20, bottom+=20, 0),
+    //          new Vector3(rigth+=20, top+=20, 0)
+    //        ))
+    //  })
 
     return controls
 }

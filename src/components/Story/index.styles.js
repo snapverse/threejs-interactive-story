@@ -19,6 +19,7 @@ export const styles = css`
       .modal {
         width: 700px;
         height: 100%; 
+        
         //object-fit: contain;
         //backdrop-filter: blur(2px);
         //background: rgba(0, 0, 0, 0.25);
@@ -146,12 +147,29 @@ export const styles = css`
         align-items: start;
         flex-direction: column;
         position: absolute;
-        top: 50px;
-        left: 35px;
+        background: url("./textures/cartel2.png");
+        //background: #181715;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 386px;
+        height: 157px;
+        top: 51px;
+        left: 18px;
+      }
+      .alert p{
+        padding: 0px 33px 0px 10.2px;
+        text-align:center;
+        position: absolute;
+        top: 38px;
+        left: 20px;
         color: white;
-        font-size: 0.975rem;
-        font-family: 'Geo Graphic Ahand';
         font-weight: 400;
+        text-align:center;
+        font-family: 'Geo Graphic Ahand';
+        font-size: 15px;
+        width: 327px;
+        height: 157px;
       }
 
       .line-separator {
@@ -236,8 +254,10 @@ export const styles = css`
 
       .translation {
         display: none;
+        border: 1px solid rgb(102 102 102);
+        margin: 0px 0px 0px 0px;
         background-color: rgb(53, 53, 53);
-        border-bottom: 2px solid black;
+        border: 1px solid #3d3a3a;
         padding: 16px;
         position: absolute;
         left: 50%;
