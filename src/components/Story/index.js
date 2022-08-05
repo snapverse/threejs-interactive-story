@@ -46,10 +46,10 @@ export default customElements.define(
       return html`
         <section class="alert">
           <div class="objective">
-            <label class="container">
+            <!-- <label class="container">
               <input type="checkbox" disabled ?checked="${false}">
               <span class="checkmark"></span>
-            </label>
+            </label> -->
             <p>${this.objective}</p>
           </div>
         </section>
