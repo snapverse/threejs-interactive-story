@@ -193,6 +193,7 @@ export default customElements.define(
       }
       .to-translate {
         margin: 0;
+        margin: 0 0 0 35px;
         display: inline;
         text-decoration: underline;
         position: relative;
@@ -205,7 +206,7 @@ export default customElements.define(
       .translation {
         display: none;
         background-color: rgb(53, 53, 53);
-        border-bottom: 2px solid black;
+        border: 1px solid rgb(102 102 102);
         padding: 16px;
         position: absolute;
         left: 50%;
@@ -244,6 +245,94 @@ export default customElements.define(
         font-weight: 500;
         margin: 0;
       }
+
+      .center-intruccions{
+        z-index:9999999999999999999999999;
+		    position:absolute;
+        display:none;
+        transform: translate(-50%,-50%);
+        top: -2753%;
+        left: 250%;
+        opacity:0;
+        top: -1419%;
+        left: 465%;
+      }
+      .instruccions{
+        width: 1268px;
+        height: 760px;
+        background-color: #111010;
+        border-radius:10px;
+        border: 1px solid #3d3a3a;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content:center;
+        display:flex;
+        padding:30px; 
+        overflow-y: scroll;
+        display:flex;
+      }
+      .instruccions::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+      .ins-img{
+        padding:20px;
+        width: 300px;
+      }
+
+      .ins-img:nth-child(1) {
+        padding: 0px 20px 41px;
+      }
+
+      /* .ins-close {
+        position: absolute;
+        width: 50px;
+        background-color: #FFF;
+        height: 40px;
+        z-index:99999999999999999999999;
+        cursor: pointer;
+        top: 8%;
+        left: 84.5%;
+        transform: translate(-50%,-50%);
+      }
+      i {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 8px;
+        background-color: #FFF;
+        border-radius: 4px;
+      }  */
+
+      .ins-open{
+        position:absolute;
+        top: 97%;
+        left: 6%;
+        transform: translate(-50%,-50%);
+        color:white;
+        padding:5px 5px;
+        background: transparent;
+        border: 2px solid #ffffff;
+        cursor: pointer;
+        border-radius: 11px;
+        width:187px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index:9999999999999999999999999999999;
+      }
+
+      .ins-open:hover{
+        background: white;
+        color: black;
+        border: 2px solid #1a1919;
+
+
+      }
+      .ins-open:hover .center-intruccions {
+		    display:flex;
+        opacity:1;
+        transition: opacity 700ms;
+	    }
     `
 
     firstUpdated() {
@@ -261,7 +350,8 @@ export default customElements.define(
           // @ts-ignore
           this.renderRoot.querySelector('#start-text').style.opacity = 1
         } 
-      }, 10000/144)        
+      }, 10000/144)
+      
     }
 
     startHandler(evt) {
@@ -292,9 +382,37 @@ export default customElements.define(
       }, 800)
     }    
 
+    hoila(){
+      function muestra_oculta(id){
+        if (document.getElementById){ //se obtiene el id
+        var el = document.getElementById(id); //se define la variable "el" igual a nuestro div
+        el.style.display = (el.style.display == 'none') ? 'block' : 'none'; //damos un atributo display:none que oculta el div
+        }
+        }
+        window.onload = function(){/*hace que se cargue la función lo que predetermina que div estará oculto hasta llamar a la función nuevamente*/
+        muestra_oculta('jiji');/* "contenido_a_mostrar" es el nombre que le dimos al DIV */
+        }
+      
+    }
+
     render() {
       return html`
         <section class="intro-hero">
+          
+          <div id="ins-open" class="ins-open">Instrucciones de uso<div class="center-intruccions">
+              <div class="instruccions"> 
+                <!-- <button class="ins-close">
+                  <i></i><i></i><i></i> -->
+                </button>
+                  <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/1.png">
+                  <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/2.png">
+                  <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/3.png">
+                  <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/a.png">
+                  <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/b.png">
+                  <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/c.png">
+              </div>
+            </div>
+            </div>
           <section class="paragraphs">
             ${story[0]?.paragraphs.map(paragraph => (
               html`<p class="paragraph">${unsafeHTML(paragraph)}</p>`

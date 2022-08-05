@@ -35,6 +35,7 @@ export function soundsCircle(camera, scene, { path, loop, volume,distance,play =
   let segmentCount = 32,radius = 100
   const geometry = new BoxGeometry( sphereradius, sphereWidh,sphereheight);
   const material = new MeshBasicMaterial({ opacity:0 })
+  //material.visible = false;
   material.transparent = true
   const circleSound = new Mesh(geometry, material)
   circleSound.add(sound)
