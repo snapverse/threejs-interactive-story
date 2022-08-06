@@ -11,6 +11,8 @@ export default customElements.define(
     constructor() {
       super()
       this.storyCounter = 1
+      this.currentSound = ""
+
       this.progressiveCounter = -1
       this.alertCounter = 0
       this.objective = "Reviví conmigo la ceremonia secreta de los mbya visitando ahora la Casa de rezos (Opy)"
@@ -21,7 +23,19 @@ export default customElements.define(
     static properties = {
       storyCounter: {},
       objective: {},
-      extraCounter: {}
+      extraCounter: {},
+      currentSound: {}
+    }
+
+    firstUpdated() {
+      const audio = this.renderRoot.querySelector('#audio')
+      this.renderRoot.querySelectorAll('.sound').forEach(element=>{
+        element.addEventListener('click',(evt)=>{
+          this.currentSound = evt.path[3].childNodes[0].textContent.toLowerCase()
+          audio.load();
+          audio.play();
+        })  
+      });
     }
 
     #toggleOpen() {
@@ -65,6 +79,10 @@ export default customElements.define(
               </div>
           </div>
         </div>
+
+        <audio  id="audio">
+          <source src="https://github.com/simmxns/interactive-webgl-story/blob/287fadafb3b454e7f7611f4d0da230efa36b94b1/public/translations/${this.currentSound}.ogg?raw=true" type="audio/ogg">
+        </audio>
       `
     }
   }
