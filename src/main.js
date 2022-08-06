@@ -19,9 +19,7 @@ let counter = 0;
 document.addEventListener('DOMContentLoaded', () => {
   init()
   animate()
-  particlesJS.load('particles', './js/particlesjs-config.json', function() {
-    console.log('callback - particles.js config loaded');
-  });
+  particlesJS.load('particles', './js/particlesjs-config.json')
 })
 
 async function init() {

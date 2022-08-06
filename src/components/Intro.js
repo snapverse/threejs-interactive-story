@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit'
+import { css, html, LitElement } from 'lit'       
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js'
 import story from '../assets/story.json'
 
@@ -28,9 +28,14 @@ export default customElements.define(
     constructor() {
       super()
       this.currentPercent = 0
+      this.currentSound = ""
       this.isStarted = false;
     }
-
+    static properties= {
+      currentPercent: {},
+      currentSound: {},
+      isStarted: {}
+    }
     static styles = css`
       .intro-hero {
         opacity: 1;
@@ -205,6 +210,7 @@ export default customElements.define(
 
       .translation {
         display: none;
+        margin: 0 0 0 35px;
         background-color: rgb(53, 53, 53);
         border: 1px solid rgb(102 102 102);
         padding: 16px;
@@ -335,9 +341,18 @@ export default customElements.define(
 	    }
     `
 
+
     firstUpdated() {
+      const audio = this.renderRoot.querySelector('#audio')
+      this.renderRoot.querySelectorAll('.sound').forEach(element=>{
+        element.addEventListener('click',(evt)=>{
+          this.currentSound = evt.path[3].childNodes[0].textContent.toLowerCase()
+          audio.load();
+          audio.play();
+        })  
+      });
       const root = document.querySelector(':root');
-      
+
       const progression = setInterval(() => {
         this.currentPercent++
         // @ts-ignore
@@ -380,7 +395,7 @@ export default customElements.define(
         // @ts-ignore
         this.renderRoot.querySelector('.intro-hero').style.display = "none"
       }, 800)
-    }    
+    }
 
     hoila(){
       function muestra_oculta(id){
@@ -427,6 +442,10 @@ export default customElements.define(
               <circle cx="60" cy="60" r="50"></circle>
             </svg>
           </span>
+  
+          <audio  id="audio">
+          <source src="https://github.com/simmxns/interactive-webgl-story/blob/287fadafb3b454e7f7611f4d0da230efa36b94b1/public/translations/${this.currentSound}.ogg?raw=true" type="audio/ogg">
+          </audio>
         </section>
       `
     }
