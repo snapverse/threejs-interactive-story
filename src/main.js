@@ -42,45 +42,48 @@ async function init() {
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
   
   plane = renderProportionalMap(scene)
-  // setTimeout(() => {
-  //    soundsCircle(camera,scene,{ path: 'sounds/tala.mp3',  loop: true, volume:300  ,distance:0.005, one: 360, two: 120, three: 0.1,play:0},-400,120,-5, 300,150,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300 , distance:0.005, one: 360, two: 120, three: 0.1,play:1},-400,120,-5, 300,150,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:5},-400,120,-5, 300,150,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:10},-400,120,-5, 300,150,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/tala3.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:8},-400,120,-5, 300,150,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/tala4.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:12},-400,120,-5, 300,150,0);
-  // }, 120000);
 
-  // setTimeout(() => {
-  //    soundsCircle(camera,scene,{ path: 'sounds/bosque.mp3',         loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/bosque2.mp3',        loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
-  //   soundsCircle(camera,scene,{ path: 'sounds/bosque3.mp3',        loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
-  //    soundsCircle(camera,scene,{ path: 'sounds/sonidopajaroas.mp3', loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
-  //   soundsCircle(camera,scene,{ path: 'sounds/alrededores.mp3', loop: true, volume: 20 ,distance:0.1, one: 0, two: 360, three: 0.1}, 60,170,-5, 300,150,0);
-  // }, 110000);
+setTimeout(() => {
+     soundsCircle(camera,scene,{ path: 'sounds/tala.mp3',  loop: true, volume:300  ,distance:0.005, one: 360, two: 120, three: 0.1,play:0},-400,120,-5, 300,150,0);
+     soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300 , distance:0.005, one: 360, two: 120, three: 0.1,play:1},-400,120,-5, 300,150,0);
+     soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:5},-400,120,-5, 300,150,0);
+     soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:10},-400,120,-5, 300,150,0);
+     soundsCircle(camera,scene,{ path: 'sounds/tala3.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:8},-400,120,-5, 300,150,0);
+     soundsCircle(camera,scene,{ path: 'sounds/tala4.mp3', loop: true, volume:300, distance:0.005, one: 360, two: 120, three: 0.1,play:12},-400,120,-5, 300,150,0);
+  }, 25000);
 
-  // setTimeout(() => {
-  //   soundsCircle(camera,scene,{ path: 'sounds/alrededores.mp3', loop: true, volume: 20 ,distance:0.1, one:360, two: 360, three: 0.1}, 300,300,0, 100,100,0);
-  // }, 950000);
+  setTimeout(() => {
+     soundsCircle(camera,scene,{ path: 'sounds/bosque.mp3',         loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
+     soundsCircle(camera,scene,{ path: 'sounds/bosque2.mp3',        loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
+    soundsCircle(camera,scene,{ path: 'sounds/bosque3.mp3',        loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
+     soundsCircle(camera,scene,{ path: 'sounds/sonidopajaroas.mp3', loop: true, volume: 50 ,distance:0.1, one: 360, two: 220, three: 0.1,play:3}, 20,170,-5, 200,100,0);
+    soundsCircle(camera,scene,{ path: 'sounds/alrededores.mp3', loop: true, volume: 20 ,distance:0.1, one: 0, two: 360, three: 0.1}, 60,170,-5, 300,150,0);
+  }, 24000);
+
+  setTimeout(() => {
+    soundsCircle(camera,scene,{ path: 'sounds/alrededores.mp3', loop: true, volume: 20 ,distance:0.1, one:360, two: 360, three: 0.1}, 300,300,0, 100,100,0);
+  }, 23000);
   
 
-  // setTimeout(() => {
-  //   soundsCircle(camera,scene,{ path: 'sounds/aldea.mp3', loop: true, volume: 35 ,distance:0.1, one: 360, two: 120, three: 0.1}, -10,-40,-5, 150,100,0);
-  //   soundsCircle(camera,scene,{ path: 'sounds/fogata.mp3', loop: true, volume: 70 ,distance:0.3, one: 120, two: 70, three: 0.1}, -40,-20,-5, 10,5,0);
-  // }, 100000);
+  setTimeout(() => {
+    soundsCircle(camera,scene,{ path: 'sounds/aldea.mp3', loop: true, volume: 35 ,distance:0.1, one: 360, two: 120, three: 0.1}, -10,-40,-5, 150,100,0);
+    soundsCircle(camera,scene,{ path: 'sounds/fogata.mp3', loop: true, volume: 70 ,distance:0.3, one: 120, two: 70, three: 0.1}, -40,-20,-5, 10,5,0);
+  }, 22000);
 
-  // setTimeout(() => {
-  //   soundsCircle(camera,scene,{ path: 'sounds/mar.mp3', loop: true, volume: 25 ,distance:0.6, one: 0, two: 360, three: 0.4}, 700,-400,0, 10,5,0);
-  //   soundsCircle(camera,scene,{ path: 'sounds/mar.mp3', loop: true, volume: 10 ,distance:0.3, one: 0, two: 360, three: 0.1}, -800,150,0, 10,5,0);
-  // }, 90000);
+  setTimeout(() => {
+    soundsCircle(camera,scene,{ path: 'sounds/mar.mp3', loop: true, volume: 25 ,distance:0.6, one: 0, two: 360, three: 0.4}, 700,-400,0, 10,5,0);
+    soundsCircle(camera,scene,{ path: 'sounds/mar.mp3', loop: true, volume: 10 ,distance:0.3, one: 0, two: 360, three: 0.1}, -800,150,0, 10,5,0);
+  }, 21000);
 
-  // setTimeout(() => {
-  //   soundsCircle(camera,scene,{ path: 'sounds/viento.mp3', loop: true, volume: 12,distance:0.1, one: 360, two: 260, three: 0.6}, 0,10,700, 300,70,30);
-  // }, 85000);
+  setTimeout(() => {
+    soundsCircle(camera,scene,{ path: 'sounds/viento.mp3', loop: true, volume: 12,distance:0.1, one: 360, two: 260, three: 0.6}, 0,10,700, 300,70,30);
+  }, 20000);
 
-  // //addBackgroundSound(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: .03 });
+
+  //addBackgroundSound(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: .03 });
   
-  // musicPlane(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: 11 ,distance:1, one: 0, two: 360, three: 0.2}, 0,0,700);
+  musicPlane(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: 11 ,distance:1, one: 0, two: 360, three: 0.2}, 0,0,700);
+
 
   document.querySelector('#app')?.appendChild(renderer.domElement)
 
