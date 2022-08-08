@@ -44,8 +44,8 @@ export default customElements.define(
         width: 100%;
         height: 100%;
         position: absolute;
+        background: #181715;
         background: url("./textures/fondo.jpg");
-        //background: #181715;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -287,6 +287,11 @@ export default customElements.define(
       .ins-img:nth-child(1) {
         padding: 0px 20px 41px;
       }
+      @media only screen and (max-width: 1472px) {
+        .logo{
+          width: 499px;
+        }
+      }
     `
 
 
@@ -362,9 +367,9 @@ export default customElements.define(
               <circle cx="60" cy="60" r="50"></circle>
             </svg>
           </span>
-  
+          
           <audio  id="audio">
-          <source src="https://github.com/simmxns/interactive-webgl-story/blob/287fadafb3b454e7f7611f4d0da230efa36b94b1/public/translations/${this.currentSound}.ogg?raw=true" type="audio/ogg">
+            <source src="https://github.com/simmxns/interactive-webgl-story/blob/287fadafb3b454e7f7611f4d0da230efa36b94b1/public/translations/${this.currentSound}.ogg?raw=true" type="audio/ogg">
           </audio>
         </section>
       `
