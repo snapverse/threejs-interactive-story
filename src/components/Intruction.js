@@ -4,28 +4,31 @@ export default customElements.define(
   'x-instruction',
   class extends LitElement {
     static styles = css`
+        .center-intruction{
+          position:absolute;
+          display:none;
+          transition: opacity 700ms;
+          width:100%;
+          height:100vh !important;
+          overflow:hidden;
+          justify-content: center;
+          align-items: center;
+        }
         .center{
+          position:relative;
+          height: 70%;
           padding: 40px 30px 60px 30px;
           background-color: rgb(17, 16, 16);
           border: 1px solid rgb(61, 58, 58);
           border-radius: 10px;
           justify-content: center;
           align-items: center;
-          width: 59%;
+          width: 69%;
           overflow-y:auto;
           z-index:9999999999999;
+          display: flex;
         }
 
-      .center-intruction{
-        position:absolute;
-        display:none;
-        transition: opacity 700ms;
-        width:100%;
-        height:100vh !important;
-        overflow:hidden;
-        justify-content: center;
-        align-items: center;
-      }
 
       .instruccions{
         display:flex;
@@ -39,26 +42,6 @@ export default customElements.define(
       .instruccions::-webkit-scrollbar {
         -webkit-appearance: none;
       }
-
-      /* .ins-close {
-        position: absolute;
-        width: 50px;
-        background-color: #FFF;
-        height: 40px;
-        z-index:99999999999999999999999;
-        cursor: pointer;
-        top: 8%;
-        left: 84.5%;
-        transform: translate(-50%,-50%);
-      }
-      i {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 8px;
-        background-color: #FFF;
-        border-radius: 4px;
-      }  */
 
       #button-icon{
         position:absolute;
@@ -78,7 +61,57 @@ export default customElements.define(
       
       .ins-img{
         width: 310px;
+        padding:5px;
       }
+
+      .center::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+
+      .center::-webkit-scrollbar:vertical {
+        width:10px;
+        
+      }
+      
+      .center::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+        display: none;
+      } 
+      
+      .center::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.25);
+        border-radius: 20px;
+      }
+
+      .center::-webkit-scrollbar-track {
+        border-radius: 10px;  
+      }
+
+      @media only screen and (max-width: 1472px) {
+        .ins-img {
+          
+                width: 231px;
+                //width: 23%;
+        }
+        .center{
+          
+          overflow-y: hidden;
+          padding: 19px 0px -10px;
+        }
+      }
+      @media only screen and (max-width: 1104px) {
+        
+        .instruccions{
+          
+          gap: inherit;
+        }
+      }
+
+      @media only screen and (max-width: 1561) {
+        .ins-img {
+          width: 283px;
+        }
+      }
+      
     `
     #svg = svg`<svg
     viewBox="0 0 36 36"
@@ -109,24 +142,18 @@ export default customElements.define(
     
     render() {
       return html`
-        <div id="button-icon" @click=${this.toggleOpen}>${this.#svg}</div>
+        <div id="button-icon" @click=${this.toggleOpen}>${this.#svg}
+        </div>
             <div class="center-intruction">
               <div class="center"> 
-                <div class="instruccions"> 
-                      <!-- <button class="ins-close">
-                        <i></i><i></i><i></i> -->
-                    <!-- </button> -->
-                    
+                <div class="instruccions">                    
                       <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/1.png">
                       <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/2.png">
                       <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/3.png">
 
-                    
-
                       <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/a.png">
                       <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/b.png">
                       <img  class="ins-img" alt="instrucciones" src="./textures/instrucciones/c.png">
-                   
                 </div>
               </div>    
             </div>
