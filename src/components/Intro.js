@@ -293,8 +293,6 @@ export default customElements.define(
         }
       }
     `
-
-
     firstUpdated() {
       const audio = this.renderRoot.querySelector('#audio')
       this.renderRoot.querySelectorAll('.sound').forEach(element=>{
