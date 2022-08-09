@@ -42,6 +42,21 @@ async function init() {
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
   
   plane = renderProportionalMap(scene)
+
+  setTimeout(() => {
+    const listener = new THREE.AudioListener();
+    camera.add( listener );
+
+    const sound = new THREE.Audio( listener );
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load( 'sounds/sonidointro.mp3', function( buffer ) {
+    sound.setBuffer( buffer );
+    sound.setLoop( false );
+    sound.setVolume( 0.2 );
+    sound.play();
+    });  
+  }, 0);
+
   setTimeout(() => {
      soundsCircle(camera,scene,{ path: 'sounds/tala.mp3',  loop: true, volume:300  ,distance:0.005, one: 360, two: 120, three: 0.1,play:0},-400,120,-5, 300,150,0);
      soundsCircle(camera,scene,{ path: 'sounds/tala2.mp3', loop: true, volume:300 , distance:0.005, one: 360, two: 120, three: 0.1,play:1},-400,120,-5, 300,150,0);
@@ -79,8 +94,10 @@ async function init() {
   }, 85000);
 
   //addBackgroundSound(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: .03 });
-  
+   
+  setTimeout(() => {
   musicPlane(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: 11 ,distance:1, one: 0, two: 360, three: 0.2}, 0,0,700);
+  }, 1000);
 
   document.querySelector('#app')?.appendChild(renderer.domElement)
 
