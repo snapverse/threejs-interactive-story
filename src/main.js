@@ -7,7 +7,7 @@ import { renderProportionalMap } from './functions/map'
 import { addBGMusic, soundsCircle } from './functions/sound'
 import { addPointer} from './functions/points'
 import { boundaryLimits } from './constants/three'
-import { getElementFromShadow } from './helpers/getElementFromShadow';
+import { fromShadow } from './helpers/fromShadow';
 
 let WINDOW_WIDTH = window.innerWidth
 let WINDOW_HEIGHT = window.innerHeight
@@ -20,8 +20,10 @@ let controls
 let counter = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
-  init()
-  animate()
+  const start = fromShadow('intro', '#start-button')
+  start.addEventListener('click', init)
+  
+  // @ts-ignore
   particlesJS.load('particles', './js/particlesjs-config.json')
   window.addEventListener('resize', handleWindowResize, false)
 })
@@ -46,20 +48,6 @@ async function init() {
   renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
   
   plane = renderProportionalMap(scene)
-
-  setTimeout(() => {
-    const listener = new THREE.AudioListener();
-    camera.add( listener );
-
-    const sound = new THREE.Audio( listener );
-    const audioLoader = new THREE.AudioLoader();
-    audioLoader.load( 'sounds/sonidointro.mp3', function( buffer ) {
-    sound.setBuffer( buffer );
-    sound.setLoop( false );
-    sound.setVolume( 0.2 );
-    sound.play();
-    });  
-  }, 0);
 
   setTimeout(() => {
      soundsCircle(camera,scene,{ path: 'sounds/tala.mp3',  loop: true, volume:300  ,distance:0.005, one: 360, two: 120, three: 0.1,play:0},-400,120,-5, 300,150,0);
@@ -97,14 +85,7 @@ async function init() {
     soundsCircle(camera,scene,{ path: 'sounds/viento.mp3', loop: true, volume: 12,distance:0.1, one: 360, two: 260, three: 0.6}, 0,10,700, 300,70,30);
   }, 85000);
 
-  //addBackgroundSound(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: .03 });
-   
-  setTimeout(() => {
-  musicPlane(camera, { path: 'sounds/musiquita.mp3', loop: true, volume: 11 ,distance:1, one: 0, two: 360, three: 0.2}, 0,0,700);
-  }, 1000);
-
   document.querySelector('#app')?.appendChild(renderer.domElement)
-
   controls = controller(camera, renderer)
 
   const { point: point1, pointer: pointer1 } = await addPointer(mmi, controls, 'opy', { x: 70, y: 3, z: 10, radius: 50 })
@@ -115,7 +96,7 @@ async function init() {
   const { point: point6, pointer: pointer6 } = await addPointer(mmi, controls, 'cerros', {  x: -130, y: -300, z: 10, radius:100})
 
   scene.add(point1, pointer1)
-  getElementFromShadow('story', '#close-button-story').addEventListener('click', evt => {
+  fromShadow('story', '#close-button-story').addEventListener('click', evt => {
     evt.preventDefault()
     evt.stopPropagation()
     counter += 1
@@ -150,6 +131,7 @@ async function init() {
         break;
     }
   })
+  animate()
 }
 
 function animate() {

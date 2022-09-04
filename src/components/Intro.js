@@ -1,6 +1,7 @@
 import { css, html, LitElement } from 'lit'       
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js'
 import story from '../assets/story.json'
+import { fromShadow } from '../helpers/fromShadow'
 
 const ArrowIcon = `<svg
 width="20px"
@@ -21,6 +22,8 @@ viewBox="0 0 248.81 167.66"
 <line class="cls-1" x1="164.98" y1="10" x2="238.81" y2="83.83" />
 <line class="cls-1" x1="238.81" y1="83.83" x2="164.98" y2="157.66" />
 </svg>`
+
+
 
 export default customElements.define(
   'x-intro',
@@ -292,19 +295,80 @@ export default customElements.define(
           width: 499px;
         }
       }
-    `
-    firstUpdated() {
-      const audio = this.renderRoot.querySelector('#audio')
-      this.renderRoot.querySelectorAll('.sound').forEach(element=>{
-        element.addEventListener('click',(evt)=>{
-          this.currentSound = evt.path[3].childNodes[0].textContent.toLowerCase()
-          audio.volume = 0.45
-          audio.load();
-          audio.play();
-        })  
-      });
-      const root = document.querySelector(':root');
 
+      .modal {
+        z-index: 9999999;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        display: grid;
+        place-items: center;
+        background-color: rgba(0,0,0,0.65);
+        backdrop-filter: blur(2px);
+      }
+      .modal.hide {
+        display: none;
+      }
+
+      .sound-modal {
+        width: 360px;
+        border-radius: 8px;
+        background-color: rgb(17, 16, 16);
+        border: 1px solid rgb(61, 58, 58);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+      }
+      .sound-modal p {
+        color: white;
+        font-size: 1.25rem;
+        margin-block: 20px;
+      }
+    
+      #activate {
+        border: none;
+        padding: 8px 20px;
+        width: 88%;
+        border-radius: 5px;
+        font-size: 0.875rem;
+        font-family: sans-serif;
+        font-weight: 600;
+        background: rgb(49, 125, 90);
+        color: white;
+        cursor: pointer;
+      }
+      #activate:hover {
+        background: rgb(37 93 68);
+      }
+
+      .headphone {
+        width: 55px;
+        height: 55px;
+        color: white;
+        margin-top: -8px;
+      }
+    `
+    
+    #modal = html`<div class="modal">
+      <div class="sound-modal">
+        <svg class="headphone" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path fill="currentColor" d="M256 32C114.52 32 0 146.496 0 288v48a32 32 0 0 0 17.689 28.622l14.383 7.191C34.083 431.903 83.421 480 144 480h24c13.255 0 24-10.745 24-24V280c0-13.255-10.745-24-24-24h-24c-31.342 0-59.671 12.879-80 33.627V288c0-105.869 86.131-192 192-192s192 86.131 192 192v1.627C427.671 268.879 399.342 256 368 256h-24c-13.255 0-24 10.745-24 24v176c0 13.255 10.745 24 24 24h24c60.579 0 109.917-48.098 111.928-108.187l14.382-7.191A32 32 0 0 0 512 336v-48c0-141.479-114.496-256-256-256z"/></svg>  
+        <p>Para una mejor experiencia es recomendable activar el sonido</p>
+        <button id="activate" @click="${this.handleActivateModal}">Activar</button>
+      </div>
+    </div>`
+
+    handleActivateModal() {
+      const muteButton = fromShadow('mute', '#circle')
+      const modal = this.renderRoot.querySelector('.modal')
+
+      muteButton.click()
+      modal.classList.add('hide')
+
+      const root = document.querySelector(':root');
       const progression = setInterval(() => {
         this.currentPercent++
         // @ts-ignore
@@ -317,21 +381,37 @@ export default customElements.define(
           // @ts-ignore
           this.renderRoot.querySelector('#start-text').style.opacity = 1
         } 
-      }, 10000/144)
-      
+      }, 12000/144)
     }
 
-    startHandler(evt) {
+    firstUpdated() {
+      /** @type {HTMLAudioElement} */
+      const audio = this.renderRoot.querySelector('#audio')
+      this.renderRoot.querySelectorAll('.sound').forEach(element=>{
+        element.addEventListener('click', evt => {
+          // @ts-ignore
+          this.currentSound = evt.path[3].childNodes[0].textContent.toLowerCase()
+          audio.volume = 0.45
+          audio.load();
+          audio.play();
+        })  
+      });
+    }
+
       
+
+    startHandler(evt) {
       if (!this.isStarted) return
       
       evt.preventDefault()
       evt.stopPropagation()
       // @ts-ignore
       this.renderRoot.querySelector('.logo').style.opacity = 0
+      // @ts-ignore
       this.renderRoot.querySelector('.percent').style.opacity = 0
 
       setTimeout(() => {
+        // @ts-ignore
         this.renderRoot.querySelector('.percent').style.display = "none"
       }, 800)
 
@@ -351,6 +431,7 @@ export default customElements.define(
 
     render() {
       return html`
+        ${this.#modal}
         <section class="intro-hero">
           <section class="paragraphs">
             ${story[0]?.paragraphs.map(paragraph => (
@@ -359,7 +440,7 @@ export default customElements.define(
           </section>
           <button class="continue-button" @click="${this.continueHandler}"><p>CONTINUAR</p>${unsafeHTML(ArrowIcon)}</button>
           <img  class="logo" alt="logo" src="./textures/logo.png">
-          <span class="percent" @click="${this.startHandler}">
+          <span class="percent" id="start-button" @click="${this.startHandler}">
             <p id="start-text">INICIAR</p>
             <svg>
               <circle cx="60" cy="60" r="50"></circle>

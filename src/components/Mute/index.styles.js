@@ -7,7 +7,6 @@ export const styles = css`
     position: relative;
     aspect-ratio: 5 / 5;
     width: 1.45rem;
-    /* border: 2px solid rgba(255, 255, 255, 0.25); */
     border-radius: 100%;
     overflow: hidden;
     cursor: pointer;

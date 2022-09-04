@@ -2,7 +2,7 @@ import { CircleGeometry, Mesh, MeshBasicMaterial, PlaneGeometry, TextureLoader} 
 import * as TWEEN from '@tweenjs/tween.js';
 import MouseMeshInteraction from '@danielblagy/three-mmi'
 import CameraControls from 'camera-controls';
-import { getElementFromShadow } from '../helpers/getElementFromShadow';
+import { fromShadow } from '../helpers/fromShadow';
 
 /** @type {(mmi: MouseMeshInteraction, controls: CameraControls, name: string, { x, y, z, zpointer, radius}: { x: number, y: number, z: number, zpointer?: number, radius?: number }) => Promise<any>} */
 export async function addPointer(mmi, controls, name, { x, y, z , zpointer = 11, radius=30}) {
@@ -73,7 +73,7 @@ export async function addPointer(mmi, controls, name, { x, y, z , zpointer = 11,
       .shadowRoot.querySelector('#text').classList.toggle("show")  
   })
 
-  getElementFromShadow('story', '#close-button-story').addEventListener('click', evt => {
+  fromShadow('story', '#close-button-story').addEventListener('click', evt => {
     evt.preventDefault()
     evt.stopPropagation()
     controls.setLookAt(0, -90, 593, 0, 0, 0, true)
