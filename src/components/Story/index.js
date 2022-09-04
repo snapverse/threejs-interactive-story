@@ -5,6 +5,17 @@ import { WINDOW_WIDTH } from '../../constants/three'
 import { getElementFromShadow } from '../../helpers/getElementFromShadow'
 import { styles } from './index.styles'
 
+const SoundResolver = {
+  kochi: 'kochi',
+  'ñande ru mirî': 'nande-ru-miri',
+  'apyka verâ': 'apyka-vera',
+  opygua: 'opygua',
+  mbya: 'mbya',
+  opy: 'opy',
+  'ka\'api': 'ka\'api',
+  jaguarete: 'yaguarete'
+}
+
 export default customElements.define(
   'x-story',
   class extends LitElement {
@@ -27,11 +38,14 @@ export default customElements.define(
       currentSound: {}
     }
 
-    firstUpdated() {
+    updated() {
+      /** @type {HTMLAudioElement} */
       const audio = this.renderRoot.querySelector('#audio')
       this.renderRoot.querySelectorAll('.sound').forEach(element=>{
-        element.addEventListener('click',(evt)=>{
-          this.currentSound = evt.path[3].childNodes[0].textContent.toLowerCase()
+        element.addEventListener('click', evt => {
+          const selected = evt.path[3].childNodes[0].textContent.toLowerCase()
+          this.currentSound = SoundResolver[selected]
+          audio.volume = 0.45
           audio.load();
           audio.play();
         })  
@@ -80,8 +94,8 @@ export default customElements.define(
           </div>
         </div>
 
-        <audio  id="audio">
-          <source src="https://github.com/simmxns/interactive-webgl-story/blob/287fadafb3b454e7f7611f4d0da230efa36b94b1/public/translations/${this.currentSound}.ogg?raw=true" type="audio/ogg">
+        <audio id="audio">
+          <source src="https://github.com/simmxns/interactive-webgl-story/blob/4bbed21b696f6c3b92d19f1c0b6582f52ff137c5/public/translations/${this.currentSound}.ogg?raw=true" type="audio/ogg">
         </audio>
       `
     }

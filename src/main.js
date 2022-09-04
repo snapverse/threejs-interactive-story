@@ -6,8 +6,11 @@ import controller from './controller'
 import { renderProportionalMap } from './functions/map'
 import { addBGMusic, soundsCircle } from './functions/sound'
 import { addPointer} from './functions/points'
-import { boundaryLimits, WINDOW_HEIGHT, WINDOW_WIDTH } from './constants/three'
+import { boundaryLimits } from './constants/three'
 import { getElementFromShadow } from './helpers/getElementFromShadow';
+
+let WINDOW_WIDTH = window.innerWidth
+let WINDOW_HEIGHT = window.innerHeight
 
 /** @type {THREE.Scene} */
 let scene, camera, renderer, listener, clock, plane, mmi, mesh
@@ -20,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   init()
   animate()
   particlesJS.load('particles', './js/particlesjs-config.json')
+  window.addEventListener('resize', handleWindowResize, false)
 })
 
 async function init() {
@@ -139,6 +143,10 @@ async function init() {
         break;
       case 6:
         scene.remove(point6, pointer6)
+        const music = document.createElement('audio')
+        music.src = "/sounds/outro.mp3"
+        music.volume = .2
+        music.play()
         break;
     }
   })
@@ -152,6 +160,16 @@ function animate() {
   window.requestAnimationFrame(animate)
   renderer.render(scene, camera)
   mmi.update()
+}
+
+const handleWindowResize = () => {
+  WINDOW_WIDTH = window.innerWidth
+  WINDOW_HEIGHT = window.innerHeight
+
+  camera.aspect = WINDOW_WIDTH / WINDOW_HEIGHT
+  camera.updateProjectionMatrix()
+
+  renderer.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
 }
 
 function musicPlane(camera, { path, loop, volume,distance,play = 0, one,two,three},transx = 0,transy= 0,transz= 0){
