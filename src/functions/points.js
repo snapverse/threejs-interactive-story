@@ -64,7 +64,10 @@ export async function addPointer(mmi, controls, name, { x, y, z , zpointer = 11,
   point.name = name
 
   mmi.addHandler(name, 'click', () => {
-    controls.fitToBox(point, true, { paddingRight: 200 })
+    controls.fitToBox(point, true, {
+      paddingRight: 150,
+      paddingTop: 80
+    })
     document
       .querySelector('#app > x-story')
       .shadowRoot.querySelector('#text').classList.toggle("show")  

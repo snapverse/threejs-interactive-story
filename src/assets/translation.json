@@ -35,8 +35,13 @@
     "translation": "Líder religioso"
   },
   {
-    "dialogue": [3],
-    "guarani": "verā",
-    "translation": "Asientos relumbrantes"
+    "dialogue": [6],
+    "guarani": "Ka'api",
+    "translation": "Especie de liana que crece en las áreas tropicales y subtropicales de Sudamérica y es utilizada por los indígenas en sus rituales por la sustancia psicoactiva que posee."
+  },
+  {
+    "dialogue": [7],
+    "guarani": "Jaguarete",
+    "translation": "Jaguar americano."
   }
 ]

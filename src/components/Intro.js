@@ -298,6 +298,7 @@ export default customElements.define(
       this.renderRoot.querySelectorAll('.sound').forEach(element=>{
         element.addEventListener('click',(evt)=>{
           this.currentSound = evt.path[3].childNodes[0].textContent.toLowerCase()
+          audio.volume = 0.45
           audio.load();
           audio.play();
         })  
