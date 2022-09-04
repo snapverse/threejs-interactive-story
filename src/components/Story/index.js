@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit'
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js'
 import story from '../../assets/story.json'
 import { WINDOW_WIDTH } from '../../constants/three'
-import { getElementFromShadow } from '../../helpers/getElementFromShadow'
+import { fromShadow } from '../../helpers/fromShadow'
 import { styles } from './index.styles'
 
 const SoundResolver = {
@@ -41,8 +41,10 @@ export default customElements.define(
     updated() {
       /** @type {HTMLAudioElement} */
       const audio = this.renderRoot.querySelector('#audio')
+
       this.renderRoot.querySelectorAll('.sound').forEach(element=>{
         element.addEventListener('click', evt => {
+          // @ts-ignore
           const selected = evt.path[3].childNodes[0].textContent.toLowerCase()
           this.currentSound = SoundResolver[selected]
           audio.volume = 0.45
@@ -64,10 +66,10 @@ export default customElements.define(
       }
       
       this.renderRoot.querySelector("#text").classList.toggle("show")
-      const currCircleWidth = getElementFromShadow('progressive-bar', `.curr-${this.progressiveCounter}`)?.getBoundingClientRect().x ?? WINDOW_WIDTH
+      const currCircleWidth = fromShadow('progressive-bar', `.curr-${this.progressiveCounter}`)?.getBoundingClientRect().x ?? WINDOW_WIDTH
       
       this.objective = story[this.alertCounter]?.alert
-      getElementFromShadow('progressive-bar', '#current-progress').style.width = `${currCircleWidth}px`
+      fromShadow('progressive-bar', '#current-progress').style.width = `${currCircleWidth}px`
     }
 
     render() {

@@ -29,8 +29,9 @@ export function soundsCircle(camera, scene, { path, loop, volume,distance,play =
     sound.setVolume(volume)
     sound.setRefDistance (distance) 
     sound.setDirectionalCone( one, two,three );
+    sound.autoplay = true
     sound.play(play)
-    
+    sound.context.resume()
   })
   let segmentCount = 32,radius = 100
   const geometry = new BoxGeometry( sphereradius, sphereWidh,sphereheight);
