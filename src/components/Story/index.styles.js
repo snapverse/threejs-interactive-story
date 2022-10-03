@@ -257,7 +257,7 @@ export const styles = css`
         border: 1px solid rgb(102 102 102);
         margin: 0px 0px 0px 0px;
         background-color: rgb(53, 53, 53);
-        border: 1px solid #3d3a3a;
+        border: 1px solid rgb(102 102 102);
         padding: 16px;
         position: absolute;
         left: 50%;
